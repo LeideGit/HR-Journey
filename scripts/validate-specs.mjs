@@ -10,15 +10,23 @@ const read = (p) => readFileSync(join(root, p), 'utf8');
 const errors = [];
 const err = (msg) => errors.push(msg);
 
+// PRD är git-ignorerad av designbeslut (publikt repo). CI har den inte.
+// Lokalt: full validering mot PRD. I CI: övriga kontroller körs, och PRD-mappningen hoppas över
+// med en tydlig notis. Lokal körning får inte hoppa över något.
 const PRD = 'PRD-HR-Journey-v002.md';
-if (!existsSync(join(root, PRD))) {
-  console.error(`BLOCKED: ${PRD} saknas. Bifoga PRD:n innan validering.`);
+const prdPresent = existsSync(join(root, PRD));
+const inCi = process.env.CI === 'true';
+if (!prdPresent && !inCi) {
+  console.error(`BLOCKED: ${PRD} saknas lokalt. Bifoga PRD:n innan validering.`);
   process.exit(1);
+}
+if (!prdPresent) {
+  console.log(`NOTIS: ${PRD} finns inte i CI. PRD-mappning kontrolleras lokalt, inte här.`);
 }
 
 const ID = /\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*-\d{3}\b/g;
 const isPrdId = (id) => !id.startsWith('FEAT-') && !id.startsWith('AC-FEAT-');
-const prdIds = new Set(read(PRD).match(ID) ?? []);
+const prdIds = new Set(prdPresent ? read(PRD).match(ID) ?? [] : []);
 const STATUSES = new Set(['planned', 'in-progress', 'needs-verification', 'blocked', 'complete']);
 const HEADINGS = ['Beteende', 'Icke-mål', 'Datamodell', 'Säkerhets', 'Beroenden', 'Risker',
   'Acceptans', 'Test', 'Verifieringsevidens', 'Öppna blockerare'];
@@ -50,10 +58,10 @@ for (const name of specNames) {
 
   const prdLine = text.match(/- \*\*PRD-ID:\*\* (.+)/)?.[1] ?? '';
   for (const ref of prdLine.match(ID) ?? []) {
-    if (isPrdId(ref) && !prdIds.has(ref)) err(`${id}: PRD-ID ${ref} finns inte i PRD`);
+    if (prdPresent && isPrdId(ref) && !prdIds.has(ref)) err(`${id}: PRD-ID ${ref} finns inte i PRD`);
   }
   for (const ref of text.match(ID) ?? []) {
-    if (!isPrdId(ref)) continue;
+    if (!prdPresent || !isPrdId(ref)) continue;
     if (prdIds.has(ref)) covered.add(ref);
     else err(`${id}: refererar ${ref} som inte finns i PRD`);
   }
@@ -85,7 +93,7 @@ for (const id of byId.keys()) {
   if (!specIds.has(id)) err(`${id}: finns i feature-list men saknar FEAT-fil (orphan)`);
 }
 
-for (const id of prdIds) {
+for (const id of prdPresent ? prdIds : []) {
   if (isPrdId(id) && !covered.has(id)) err(`PRD-ID ${id} är inte mappat till någon FEAT (omappat krav)`);
 }
 
@@ -94,4 +102,6 @@ if (errors.length) {
   console.error(`\n${errors.length} fel. Merge blockeras.`);
   process.exit(1);
 }
-console.log(`OK: ${specNames.length} FEAT, ${covered.size} av ${prdIds.size} PRD-ID mappade.`);
+console.log(prdPresent
+  ? `OK: ${specNames.length} FEAT, ${covered.size} av ${prdIds.size} PRD-ID mappade.`
+  : `OK: ${specNames.length} FEAT. PRD-mappning hoppad över (PRD saknas i CI).`);
