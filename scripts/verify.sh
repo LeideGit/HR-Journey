@@ -55,17 +55,20 @@ elif ! command -v supabase >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; the
 else
   # Återskapa lokal databas från migrationer och seed, kör RLS-testet, och kontrollera utfallet.
   supabase db reset --local >/dev/null 2>&1 || fail "supabase db reset misslyckades"
-  out=$(docker exec -i "$(docker ps --format '{{.Names}}' | grep supabase_db_ | head -1)" \
-        psql -U postgres -d postgres -v ON_ERROR_STOP=0 -f - < supabase/tests/rls_dokument.sql 2>&1)
-  echo "$out" | grep -E 'NOTICE: +TEST' | sed 's/^.*NOTICE: *//'
-  if echo "$out" | grep -q 'FAIL'; then
-    fail "RLS-test har FAIL-påståenden"
-  elif [ "$(echo "$out" | grep -c 'TEST .*: PASS')" -lt 7 ]; then
-    fail "RLS-testet gav färre än 7 PASS. Kontrollera utskriften."
-  else
-    ok "RLS- och Storage-tester (7 påståenden)"
-  fi
-  supabase db reset --local >/dev/null 2>&1
+  container=$(docker ps --format '{{.Names}}' | grep supabase_db_ | head -1)
+  for pair in "rls_dokument.sql:7" "rls_milestones.sql:6"; do
+    file=${pair%%:*}; expected=${pair##*:}
+    out=$(docker exec -i "$container" psql -U postgres -d postgres -v ON_ERROR_STOP=0 -f - < "supabase/tests/$file" 2>&1)
+    echo "$out" | grep -E 'NOTICE: +TEST' | sed 's/^.*NOTICE: *//'
+    if echo "$out" | grep -q 'FAIL'; then
+      fail "$file har FAIL-påståenden"
+    elif [ "$(echo "$out" | grep -c 'TEST .*: PASS')" -lt "$expected" ]; then
+      fail "$file gav färre än $expected PASS"
+    else
+      ok "$file ($expected påståenden)"
+    fi
+    supabase db reset --local >/dev/null 2>&1
+  done
 fi
 
 step "Ej konfigurerade kontroller"

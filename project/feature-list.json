@@ -9,7 +9,9 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-001-autentisering-och-roller.md",
-      "blocked_by": ["D-7"],
+      "blocked_by": [
+        "D-7"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -19,7 +21,10 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-002-personprofil-och-tidslinje.md",
-      "blocked_by": ["OQ-003", "B12"],
+      "blocked_by": [
+        "OQ-003",
+        "B12"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -27,22 +32,40 @@
       "id": "FEAT-003",
       "title": "Profiler, tidslinjemallar, milestones och tasks",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-003-profiler-mallar-och-milestones.md",
-      "blocked_by": ["OQ-002"],
-      "blocked_parts": ["FR-TMPL-002", "FR-TMPL-003", "TEST-004"],
-      "implementation": null,
-      "evidence": null
+      "blocked_by": [
+        "OQ-002"
+      ],
+      "blocked_parts": [
+        "FR-TMPL-002",
+        "FR-TMPL-003",
+        "TEST-004"
+      ],
+      "implementation": [
+        "supabase/migrations/20261029140000_milestones_och_tasks.sql",
+        "src/milestones/status.ts"
+      ],
+      "evidence": [
+        "src/milestones/status.test.ts (16 tester med dashboard-status för FEAT-004 ingår inte)",
+        "supabase/tests/rls_milestones.sql (6 PASS)"
+      ]
     },
     {
       "id": "FEAT-004",
       "title": "Dashboard och arbetskö",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-004-dashboard.md",
-      "blocked_by": ["OQ-001"],
-      "implementation": null,
-      "evidence": null
+      "blocked_by": [
+        "OQ-001"
+      ],
+      "implementation": [
+        "src/milestones/status.ts (statusberäkning, OQ-001 ej beslutad)"
+      ],
+      "evidence": [
+        "src/milestones/status.test.ts"
+      ]
     },
     {
       "id": "FEAT-005",
@@ -50,7 +73,9 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-005-simulerade-mejl.md",
-      "blocked_by": ["B6"],
+      "blocked_by": [
+        "B6"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -60,8 +85,13 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-006-dokument-versioner-och-gallring.md",
-      "blocked_by": ["OQ-004", "B23"],
-      "blocked_parts": ["Office-preview"],
+      "blocked_by": [
+        "OQ-004",
+        "B23"
+      ],
+      "blocked_parts": [
+        "Office-preview"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -72,7 +102,10 @@
       "status": "planned",
       "spec": "specs/FEAT-007-ai-assistent.md",
       "blocked_by": [],
-      "future_scope": ["FR-AI-FUT-001", "BL-003"],
+      "future_scope": [
+        "FR-AI-FUT-001",
+        "BL-003"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -83,9 +116,19 @@
       "status": "planned",
       "spec": "specs/FEAT-008-microsoft-365-motmöte.md",
       "blocked_by": [],
-      "adr": ["docs/adr/ADR-006-microsoft-graph-som-integrationslager.md", "docs/adr/ADR-007-mockad-m365-adapter-i-mvp.md"],
-      "future_blocked_by": ["ADR-008", "ADR-009", "ADR-010", "ADR-011"],
-      "future_scope": ["FEAT-008-F1 to FEAT-008-F22"],
+      "adr": [
+        "docs/adr/ADR-006-microsoft-graph-som-integrationslager.md",
+        "docs/adr/ADR-007-mockad-m365-adapter-i-mvp.md"
+      ],
+      "future_blocked_by": [
+        "ADR-008",
+        "ADR-009",
+        "ADR-010",
+        "ADR-011"
+      ],
+      "future_scope": [
+        "FEAT-008-F1 to FEAT-008-F22"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -95,7 +138,11 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-009-historik-och-granskningsspar.md",
-      "blocked_by": ["B1", "B6", "B9"],
+      "blocked_by": [
+        "B1",
+        "B6",
+        "B9"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -115,8 +162,12 @@
       "scope": "MVP",
       "status": "planned",
       "spec": "specs/FEAT-011-administration-och-systeminstallningar.md",
-      "blocked_by": ["OQ-002"],
-      "blocked_parts": ["FEAT-011-B10"],
+      "blocked_by": [
+        "OQ-002"
+      ],
+      "blocked_parts": [
+        "FEAT-011-B10"
+      ],
       "implementation": null,
       "evidence": null
     },
@@ -132,10 +183,48 @@
     }
   ],
   "open_decisions": [
-    {"id": "OQ-001", "text": "Gräns mellan Kommande och Aktuellt", "owner": "user", "blocks": ["FEAT-004"]},
-    {"id": "OQ-002", "text": "Konfliktregel för mallpropagering", "owner": "user", "blocks": ["FEAT-003", "FEAT-011"], "status": "deferred by user (D-6)"},
-    {"id": "OQ-003", "text": "Exakt tidslinjeskala", "owner": "user", "blocks": ["FEAT-002"]},
-    {"id": "OQ-004", "text": "Previewteknik för Office-dokument", "owner": "user", "blocks": ["FEAT-006"]},
-    {"id": "D-7", "text": "Användarprovisionering", "owner": "user", "blocks": ["FEAT-001 hosted login"], "status": "deferred by user, demo MVP"}
+    {
+      "id": "OQ-001",
+      "text": "Gräns mellan Kommande och Aktuellt",
+      "owner": "user",
+      "blocks": [
+        "FEAT-004"
+      ]
+    },
+    {
+      "id": "OQ-002",
+      "text": "Konfliktregel för mallpropagering",
+      "owner": "user",
+      "blocks": [
+        "FEAT-003",
+        "FEAT-011"
+      ],
+      "status": "deferred by user (D-6)"
+    },
+    {
+      "id": "OQ-003",
+      "text": "Exakt tidslinjeskala",
+      "owner": "user",
+      "blocks": [
+        "FEAT-002"
+      ]
+    },
+    {
+      "id": "OQ-004",
+      "text": "Previewteknik för Office-dokument",
+      "owner": "user",
+      "blocks": [
+        "FEAT-006"
+      ]
+    },
+    {
+      "id": "D-7",
+      "text": "Användarprovisionering",
+      "owner": "user",
+      "blocks": [
+        "FEAT-001 hosted login"
+      ],
+      "status": "deferred by user, demo MVP"
+    }
   ]
 }

@@ -1,7 +1,7 @@
 # FEAT-003 Profiler, tidslinjemallar, milestones och tasks
 
 - **FEAT-ID:** FEAT-003
-- **Status:** planned
+- **Status:** in-progress
 - **Scopeklassificering:** MVP, med blockerad delfunktion (mallpropagering)
 - **PRD-ID:** PP-004, PP-005, PP-010, G-005, G-006, SK-006, SK-007, SK-008, SK-010, FR-PROF-001 till FR-PROF-006, FR-TMPL-001 till FR-TMPL-005, FR-MILE-001 till FR-MILE-006, FR-VTL-007, FR-VTL-008, FR-VTL-009, FR-VTL-010, FR-VTL-011, FR-VTL-016, FR-VTL-017, FR-VTL-018, FR-VTL-019, AC-005, AC-006, TEST-004, OQ-002, FR-M365-MVP-001
 
