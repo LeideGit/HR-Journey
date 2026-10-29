@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addMonths, assignLanes, computeScale, dayToIso, xFor } from './scale';
+import { addMonths, assignLanes, computeScale, dayToIso, scrollLeftToCenter, xFor } from './scale';
 import { toDayNumber } from '../milestones/status';
 
 // FEAT-002, OQ-003 (beslutad 2026-10-29). Alla datum är fiktiva och relativa till TODAY.
@@ -64,6 +64,26 @@ describe('xFor', () => {
     const a = xFor(toDayNumber('2026-02-01'), start, 3);
     const b = xFor(toDayNumber('2026-03-01'), start, 3);
     expect(b).toBeGreaterThan(a);
+  });
+});
+
+describe('scrollLeftToCenter (idag i mitten)', () => {
+  it('placerar idag mitt i vyn när det finns utrymme på båda sidor', () => {
+    // idag vid x=1000, vyn 400 bred, canvas 3000 bred → scroll 800 så att 1000 hamnar mitt i 800..1200
+    expect(scrollLeftToCenter(1000, 400, 3000)).toBe(800);
+  });
+
+  it('startar inte negativt när idag ligger nära canvas-start', () => {
+    expect(scrollLeftToCenter(50, 400, 3000)).toBe(0);
+  });
+
+  it('stannar vid maxscroll när idag ligger nära canvas-slut', () => {
+    // max = 3000 - 400 = 2600
+    expect(scrollLeftToCenter(2950, 400, 3000)).toBe(2600);
+  });
+
+  it('ger 0 när canvas ryms helt i vyn', () => {
+    expect(scrollLeftToCenter(100, 800, 600)).toBe(0);
   });
 });
 

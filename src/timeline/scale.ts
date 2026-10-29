@@ -77,6 +77,16 @@ export function xFor(day: number, canvasStart: number, pxPerDay: number): number
   return (day - canvasStart) * pxPerDay;
 }
 
+/**
+ * Scrollposition som placerar dagen mitt i vyn. Begränsas till [0, maxScroll], så att
+ * dagen nära canvas-kanten inte ger tomt utrymme. FEAT-002-B4: dagens datum ska framgå.
+ */
+export function scrollLeftToCenter(targetX: number, viewportWidth: number, canvasWidth: number): number {
+  const max = Math.max(0, canvasWidth - viewportWidth);
+  const wanted = targetX - viewportWidth / 2;
+  return Math.min(max, Math.max(0, wanted));
+}
+
 export interface LaneItem {
   id: string;
   x: number;
