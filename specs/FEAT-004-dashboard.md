@@ -1,7 +1,7 @@
 # FEAT-004 Dashboard och arbetskö
 
 - **FEAT-ID:** FEAT-004
-- **Status:** planned
+- **Status:** in-progress
 - **Scopeklassificering:** MVP
 - **PRD-ID:** PP-005, G-001, G-002, SK-001, SK-002, SK-013, FR-DASH-001 till FR-DASH-008, AC-002, NFR-001, OQ-001
 
