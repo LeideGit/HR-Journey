@@ -47,28 +47,57 @@ describe('PersonPage', () => {
     expect(screen.getByText('Idag')).toBeInTheDocument();
   });
 
-  it('aktuell milestone är den som är aktuell eller försenad, inte slutförd (SK-005)', () => {
+  it('ingen infomodul visas när personsidan öppnas (ingen händelse vald)', () => {
     render(<PersonPage person={person} onBack={() => {}} />);
-    const card = screen.getByRole('heading', { name: 'Aktuell milestone' }).closest('section') as HTMLElement;
-    expect(within(card).getByText('Fiktiv uppföljning')).toBeInTheDocument();
-    expect(within(card).getByText('1 av 2 uppgifter klara')).toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: 'Fiktiv uppföljning' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('region', { name: /Fiktivt avslut/ })).not.toBeInTheDocument();
   });
 
-  it('nästa milestone är nästa icke-slutförda, efter aktuell (SK-005)', () => {
+  it('klick på samma händelse igen stänger infomodulen', () => {
     render(<PersonPage person={person} onBack={() => {}} />);
-    const card = screen.getByRole('heading', { name: 'Nästa milestone' }).closest('section') as HTMLElement;
-    expect(within(card).getByText('Fiktivt kompetenssamtal')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Fiktivt avslut/ }));
+    expect(screen.getByRole('region', { name: 'Fiktivt avslut' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Fiktivt avslut/ }));
+    expect(screen.queryByRole('region', { name: 'Fiktivt avslut' })).not.toBeInTheDocument();
+  });
+
+  it('avklarad milestone får grön bakgrund, inte vit (wireframe 02)', () => {
+    render(<PersonPage person={person} onBack={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: /Fiktiv introduktion/ }));
+    const info = screen.getByRole('region', { name: 'Fiktiv introduktion' });
+    expect(info).toHaveClass('mi-shell-slutford');
+  });
+
+  it('klick på en händelse i tidslinjen väljer den och visar den i infomodulen (FEAT-002-B8)', () => {
+    render(<PersonPage person={person} onBack={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: /Fiktivt avslut/ }));
+    const info = screen.getByRole('region', { name: 'Fiktivt avslut' });
+    expect(within(info).getByText('Fiktivt avslut')).toBeInTheDocument();
+  });
+
+  it('valt kort markeras som vald (aria-pressed)', () => {
+    render(<PersonPage person={person} onBack={() => {}} />);
+    fireEvent.click(screen.getByRole('button', { name: /Fiktivt avslut/ }));
+    expect(screen.getByRole('button', { name: /Fiktivt avslut/ })).toHaveAttribute('aria-pressed', 'true');
+  });
+
+  it('snabbfakta ligger i headern, inte under tidslinjen (FEAT-002-B1)', () => {
+    render(<PersonPage person={person} onBack={() => {}} />);
+    const header = document.querySelector('.person-head') as HTMLElement;
+    expect(within(header).getByText('Slutförda')).toBeInTheDocument();
+    expect(within(header).getByText('Öppna')).toBeInTheDocument();
   });
 
   it('snabbfakta räknar slutförda och öppna milestones', () => {
     render(<PersonPage person={person} onBack={() => {}} />);
-    expect(screen.getByText('Slutförda milestones: 1 av 4')).toBeInTheDocument();
-    expect(screen.getByText('Öppna milestones: 3')).toBeInTheDocument();
+    const header = document.querySelector('.person-head') as HTMLElement;
+    expect(within(header).getByText('1 av 4')).toBeInTheDocument();
+    expect(within(header).getByText('3')).toBeInTheDocument();
   });
 
   it('milestone långt fram finns i tidslinjen och nås med scroll (OQ-003)', () => {
     render(<PersonPage person={person} onBack={() => {}} />);
-    expect(screen.getByRole('article', { name: /Fiktivt avslut/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Fiktivt avslut/ })).toBeInTheDocument();
   });
 
   it('andra flikar visar tydligt att de inte är byggda ännu', () => {

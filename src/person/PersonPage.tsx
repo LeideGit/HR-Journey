@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Timeline, type TimelineMilestone } from '../timeline/Timeline';
-import { beraknaStatus, progress, type MilestoneStatus } from '../milestones/status';
+import { MilestoneInfo } from './MilestoneInfo';
+import { beraknaStatus, type MilestoneStatus } from '../milestones/status';
 import { FIXTURE_TODAY, FIXTURE_WINDOW_DAYS } from '../dashboard/fixtures';
 import type { ProfileType } from '../dashboard/queue';
 import './person.css';
@@ -38,6 +39,7 @@ interface Props {
 
 export function PersonPage({ person, onBack }: Props) {
   const [tab, setTab] = useState<Tab>('Tidslinje');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const statusOf = useMemo(
     () => (m: TimelineMilestone): MilestoneStatus =>
@@ -45,14 +47,16 @@ export function PersonPage({ person, onBack }: Props) {
     [],
   );
 
-  // Aktuell milestone: första icke-slutförda, sorterad på datum, som är aktuell eller försenad.
+  // Öppna milestones sorterade på datum. Används för snabbfakta i headern.
   const open = person.milestones
     .filter((m) => statusOf(m) !== 'slutford')
     .sort((a, b) => a.dueDate.localeCompare(b.dueDate));
-  const current = open.find((m) => statusOf(m) === 'aktuellt' || statusOf(m) === 'forsenad') ?? null;
-  const next = open.find((m) => m !== current) ?? null;
   const finished = person.milestones.filter((m) => statusOf(m) === 'slutford');
   const done = finished.length;
+
+  // Ingen händelse är vald vid start. Infomodulen visas först när användaren klickar en händelse.
+  const selected = person.milestones.find((m) => m.id === selectedId) ?? null;
+  const selectedStatus = selected ? statusOf(selected) : null;
 
   return (
     <main className="person">
@@ -60,23 +64,27 @@ export function PersonPage({ person, onBack }: Props) {
       <button type="button" className="person-back" onClick={onBack}>← Tillbaka till arbetskön</button>
 
       <header className="person-head">
-        <div className="person-avatar" aria-hidden="true">{initials(person.name)}</div>
         <div className="person-id">
-          <h1>{person.name}</h1>
-          <p className="person-role">
-            {PROFILE_LABEL[person.profileType]}
-            <span className={`person-active ${person.isActive ? 'on' : 'off'}`}>
-              {person.isActive ? 'Aktiv' : 'Arkiverad'}
-            </span>
-          </p>
-          <dl className="person-facts">
-            <div><dt>Avdelning</dt><dd>{person.department}</dd></div>
-            <div><dt>Chef</dt><dd>{person.manager}</dd></div>
-            <div><dt>Startdatum</dt><dd>{fmt(person.startDate)}</dd></div>
-            <div><dt>Slutdatum</dt><dd>{person.endDate ? fmt(person.endDate) : 'Tillsvidare'}</dd></div>
-            <div><dt>E-post</dt><dd>{person.email}</dd></div>
-          </dl>
+          <div className="person-avatar" aria-hidden="true">{initials(person.name)}</div>
+          <div className="person-name">
+            <h1>{person.name}</h1>
+            <p className="person-role">
+              {PROFILE_LABEL[person.profileType]}
+              <span className={`person-active ${person.isActive ? 'on' : 'off'}`}>
+                {person.isActive ? 'Aktiv' : 'Arkiverad'}
+              </span>
+            </p>
+          </div>
         </div>
+        <dl className="person-facts">
+          <div><dt>Avdelning</dt><dd>{person.department}</dd></div>
+          <div><dt>Chef</dt><dd>{person.manager}</dd></div>
+          <div><dt>Startdatum</dt><dd>{fmt(person.startDate)}</dd></div>
+          <div><dt>Slutdatum</dt><dd>{person.endDate ? fmt(person.endDate) : 'Tillsvidare'}</dd></div>
+          <div><dt>E-post</dt><dd>{person.email}</dd></div>
+          <div><dt>Slutförda</dt><dd>{done} av {person.milestones.length}</dd></div>
+          <div><dt>Öppna</dt><dd>{open.length}</dd></div>
+        </dl>
       </header>
 
       <nav className="person-tabs" aria-label="Personvyer">
@@ -100,40 +108,13 @@ export function PersonPage({ person, onBack }: Props) {
             todayIso={FIXTURE_TODAY}
             milestones={person.milestones}
             windowDaysForStatus={FIXTURE_WINDOW_DAYS}
+            selectedId={selected?.id ?? null}
+            onSelect={(id) => setSelectedId((prev) => (prev === id ? null : id))}
           />
 
-          <div className="person-cards">
-            <section className="person-card" aria-labelledby="cur-h">
-              <h2 id="cur-h">Aktuell milestone</h2>
-              {current ? (
-                <>
-                  <p className="person-card-title">{current.title}</p>
-                  <p className="person-card-date">{fmt(current.dueDate)}</p>
-                  <ProgressBar tasks={current.tasks} />
-                </>
-              ) : (
-                <p className="person-empty">Ingen aktuell milestone.</p>
-              )}
-            </section>
-
-            <section className="person-card" aria-labelledby="next-h">
-              <h2 id="next-h">Nästa milestone</h2>
-              {next ? (
-                <>
-                  <p className="person-card-title">{next.title}</p>
-                  <p className="person-card-date">{fmt(next.dueDate)}</p>
-                </>
-              ) : (
-                <p className="person-empty">Ingen kommande milestone.</p>
-              )}
-            </section>
-
-            <section className="person-card" aria-labelledby="facts-h">
-              <h2 id="facts-h">Snabbfakta</h2>
-              <p>Slutförda milestones: {done} av {person.milestones.length}</p>
-              <p>Öppna milestones: {open.length}</p>
-            </section>
-          </div>
+          {selected && selectedStatus && (
+            <MilestoneInfo milestone={selected} status={selectedStatus} />
+          )}
         </div>
       )}
 
@@ -144,24 +125,6 @@ export function PersonPage({ person, onBack }: Props) {
   );
 }
 
-function ProgressBar({ tasks }: { tasks: TimelineMilestone['tasks'] }) {
-  const p = progress(tasks);
-  return (
-    <div className="person-progress">
-      <div
-        className="person-progress-bar"
-        role="progressbar"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={p.percent}
-        aria-label={`${p.done} av ${p.total} uppgifter klara`}
-      >
-        <span style={{ width: `${p.percent}%` }} />
-      </div>
-      <span className="person-progress-label">{p.done} av {p.total} uppgifter klara</span>
-    </div>
-  );
-}
 
 function initials(name: string): string {
   return name.replace(/^Fiktiv\s+/, '').split(' ').map((w) => w[0]).slice(0, 2).join('');
