@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "note": "Inga baselines än. Runnern är inte implementerad, och ingen eval har körts. Lägg in baseline först när en eval passerat med verifierad seed.",
+  "baselines": {}
+}

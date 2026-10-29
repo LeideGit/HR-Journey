@@ -1,0 +1,17 @@
+id: EVAL-AI-003
+title: Behörighet filtrerar @, / , svar och källor
+feat: FEAT-007
+prd: [FR-AI-CTX-008, FR-AI-CTX-012, AC-AI-004, AC-AI-005, AC-AI-014, SEC-013, TEST-AI-006]
+status: not-run
+blocked_by: [seed-data, mockmotor, rolltest-konton]
+input:
+  user: HR utan särskild behörighet till skyddat dokument
+  actions:
+    - skriv @ och kontrollera personlistan
+    - skriv / och kontrollera dokumentlistan
+    - ställ en fråga som skulle träffa det skyddade dokumentet
+    - öppna en källa till dokument vars behörighet har återkallats
+expected:
+  - skyddat dokument syns inte i autocomplete, svar eller källor
+  - otillgänglig källa visas neutralt utan innehåll
+grader: evals/graders/permission-leak.md

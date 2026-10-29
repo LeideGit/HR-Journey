@@ -1,0 +1,30 @@
+# Dependencies and build output
+node_modules/
+dist/
+
+# Secrets - never commit (TECH-030)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Supabase local dev
+supabase/.branches
+supabase/.temp
+.supabase/
+
+# OS and editor
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+
+# Project planning documents - kept out of the public repo
+PRD-HR-Journey*.md
+project-preparations.md
+
+# Graphify output - local knowledge graph, not for the public repo
+graphify-out/
+
+# Personal Claude Code settings, not shared
+.claude/settings.local.json

@@ -1,0 +1,14 @@
+id: EVAL-AI-001
+title: Persons kommande arbete sammanfattas från mockdata
+feat: FEAT-007
+prd: [FR-AI-FUNC-001, AC-AI-008, TEST-AI-001]
+status: not-run
+blocked_by: [seed-data, mockmotor]
+input:
+  page: personprofil
+  person: fiktiv seed-person med minst två kommande milestones
+  question: Sammanfatta vad som är på väg för personen.
+expected:
+  - svaret nämner endast milestones som finns i seed-data
+  - varje påstående har en källa av typ person eller milestone
+grader: evals/graders/source-grounding.md

@@ -1,0 +1,14 @@
+id: EVAL-M365-001
+title: Mockad mötesbokning från milestone är märkt och utan verklig trafik
+feat: FEAT-008
+prd: [FR-M365-MVP-005, FR-M365-MVP-007, FR-M365-MVP-009, AC-M365-MVP-005, AC-M365-MVP-007, AC-M365-MVP-008, TEST-M365-001, TEST-M365-003, TEST-M365-004]
+status: not-run
+blocked_by: [seed-data, mock-adapter]
+input:
+  page: milestonevy
+  action: Boka möte från milestonen med tider och Teams-alternativ
+expected:
+  - en post skapas med is_mock = true och kopplas till person och milestone
+  - UI visar tydlig mockindikator
+  - inga nätverksanrop mot Microsoft-domäner (graph.microsoft.com, login.microsoftonline.com)
+grader: evals/graders/mock-indicator.md

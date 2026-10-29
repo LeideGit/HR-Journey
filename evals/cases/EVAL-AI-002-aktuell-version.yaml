@@ -1,0 +1,15 @@
+id: EVAL-AI-002
+title: Aktuell dokumentversion används som standard
+feat: FEAT-007
+prd: [FR-AI-CTX-010, FR-AI-CTX-011, AC-AI-006, AC-AI-007, TEST-AI-003]
+status: not-run
+blocked_by: [seed-data, mockmotor]
+input:
+  page: dokumentvy
+  document: fiktivt dokument med minst två versioner, där den nyare är aktuell
+  question: Vad står det i dokumentet?
+  variant: en fråga utan versionsval, och en fråga med uttryckligt val av äldre version
+expected:
+  - utan versionsval används aktuell version i källan
+  - med uttryckligt val används den valda versionen i källan
+grader: evals/graders/source-grounding.md
