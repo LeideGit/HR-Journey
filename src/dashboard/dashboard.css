@@ -186,6 +186,24 @@ body {
   cursor: pointer;
 }
 
+.dash-link {
+  font: inherit;
+  color: var(--kommande);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.dash-link:focus-visible {
+  outline: 2px solid var(--kommande);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .dash-reset:disabled {
   color: var(--ink-muted);
   cursor: default;

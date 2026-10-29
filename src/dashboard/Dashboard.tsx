@@ -24,7 +24,11 @@ function formatDate(iso: string): string {
   return DATE_FORMAT.format(new Date(Date.UTC(y, m - 1, d)));
 }
 
-export function Dashboard() {
+interface DashboardProps {
+  onOpenPerson: (personId: string) => void;
+}
+
+export function Dashboard({ onOpenPerson }: DashboardProps) {
   const [profileType, setProfileType] = useState<ProfileType | ''>('');
   const [status, setStatus] = useState<MilestoneStatus | ''>('');
 
@@ -112,11 +116,16 @@ export function Dashboard() {
               <tbody>
                 {milestones.map((r) => {
                   if (r.item.kind !== 'milestone' || !r.status) return null;
+                  const personId = r.item.personId;
                   return (
                     <tr key={r.item.id}>
                       <td><span className={`badge badge-${r.status}`}>{STATUS_LABEL[r.status]}</span></td>
                       <td>{formatDate(r.item.dueDate)}</td>
-                      <td>{r.item.personName}</td>
+                      <td>
+                        <button type="button" className="dash-link" onClick={() => onOpenPerson(personId)}>
+                          {r.item.personName}
+                        </button>
+                      </td>
                       <td>{r.item.title}</td>
                       <td>{PROFILE_LABEL[r.item.profileType]}</td>
                     </tr>
