@@ -10,6 +10,7 @@ export interface TimelineMilestone {
   id: string;
   title: string;
   dueDate: string;
+  description?: string;
   tasks: TaskState[];
 }
 
@@ -18,6 +19,9 @@ interface Props {
   milestones: TimelineMilestone[];
   windowDaysForStatus: number;
   monthFormat?: Intl.DateTimeFormat;
+  /** Vald milestone. Kontrolleras av föräldern, så att infomodulen under tidslinjen kan visa den. */
+  selectedId: string | null;
+  onSelect: (id: string) => void;
 }
 
 const PX_PER_DAY = 3;
@@ -35,7 +39,7 @@ const STATUS_LABEL: Record<MilestoneStatus, string> = {
   slutford: 'Slutförd',
 };
 
-export function Timeline({ todayIso, milestones, windowDaysForStatus, monthFormat = MONTH }: Props) {
+export function Timeline({ todayIso, milestones, windowDaysForStatus, monthFormat = MONTH, selectedId, onSelect }: Props) {
   const scale = useMemo(
     () => computeScale({ todayIso, eventDates: milestones.map((m) => m.dueDate) }),
     [todayIso, milestones],
@@ -116,17 +120,19 @@ export function Timeline({ todayIso, milestones, windowDaysForStatus, monthForma
             const x = xFor(day, scale.canvasStart, PX_PER_DAY);
             const done = m.tasks.filter((t) => t.isDone).length;
             return (
-              <article
+              <button
                 key={m.id}
-                className={`tl-card tl-card-${status}`}
+                type="button"
+                className={`tl-card tl-card-${status}${selectedId === m.id ? ' tl-card-selected' : ''}`}
                 style={{ left: x, top: 40 + lane * LANE_HEIGHT, width: CARD_WIDTH }}
-                tabIndex={0}
+                aria-pressed={selectedId === m.id}
                 aria-label={`${m.title}, ${DAY.format(new Date(day * 86_400_000))}, ${STATUS_LABEL[status]}, ${done} av ${m.tasks.length} klara`}
+                onClick={() => onSelect(m.id)}
               >
                 <span className="tl-card-status">{STATUS_LABEL[status]}</span>
                 <span className="tl-card-title">{m.title}</span>
                 <span className="tl-card-date">{DAY.format(new Date(day * 86_400_000))}</span>
-              </article>
+              </button>
             );
           })}
         </div>

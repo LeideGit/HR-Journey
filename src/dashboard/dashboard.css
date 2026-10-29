@@ -17,6 +17,8 @@
   --aktuell-bg: #fdf1d6;
   --kommande: #1d4f91;
   --kommande-bg: #e4eefb;
+  --slutford: #1f7a3d;
+  --slutford-bg: #e3f5ea;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +31,7 @@
     --forsenad-bg: rgba(180, 35, 24, 0.18);
     --aktuell-bg: rgba(138, 90, 0, 0.2);
     --kommande-bg: rgba(29, 79, 145, 0.22);
+    --slutford-bg: rgba(31, 122, 61, 0.22);
   }
 }
 

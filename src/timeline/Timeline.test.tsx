@@ -21,7 +21,7 @@ const far: TimelineMilestone = {
 
 describe('Timeline', () => {
   it('visar milestones med titel, datum och status (FR-VTL-004, FR-VTL-005)', () => {
-    render(<Timeline todayIso={TODAY} milestones={[near, past]} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={[near, past]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     expect(screen.getByText('Fiktiv uppföljning')).toBeInTheDocument();
     expect(screen.getByText('Fiktiv introduktion')).toBeInTheDocument();
     expect(screen.getByText('Slutförd')).toBeInTheDocument();
@@ -30,31 +30,31 @@ describe('Timeline', () => {
   });
 
   it('markerar dagens datum (FR-VTL-013)', () => {
-    render(<Timeline todayIso={TODAY} milestones={[near]} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={[near]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     expect(screen.getByText('Idag')).toBeInTheDocument();
   });
 
   it('händelse långt fram finns i DOM och nås med scroll (OQ-003, FR-VTL-015)', () => {
-    render(<Timeline todayIso={TODAY} milestones={[near, far]} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={[near, far]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     // Händelsen 2027-08 ligger utanför 6-månadersfönstret men ska finnas på canvas.
     expect(screen.getByText('Fiktiv avslut')).toBeInTheDocument();
   });
 
   it('kortet är tangentbordsfokuserbart (NFR-011, AC-FEAT-002-4)', () => {
-    render(<Timeline todayIso={TODAY} milestones={[near]} windowDaysForStatus={28} />);
-    const card = screen.getByRole('article', { name: /Fiktiv uppföljning/ });
-    expect(card).toHaveAttribute('tabindex', '0');
+    render(<Timeline todayIso={TODAY} milestones={[near]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
+    const card = screen.getByRole('button', { name: /Fiktiv uppföljning/ });
+    expect(card.tagName).toBe('BUTTON');
   });
 
   it('kortets etikett innehåller status och klara tasks (WCAG, FR-VTL-005)', () => {
-    render(<Timeline todayIso={TODAY} milestones={[past]} windowDaysForStatus={28} />);
-    const card = screen.getByRole('article', { name: /Fiktiv introduktion/ });
+    render(<Timeline todayIso={TODAY} milestones={[past]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
+    const card = screen.getByRole('button', { name: /Fiktiv introduktion/ });
     expect(card.getAttribute('aria-label')).toMatch(/Slutförd/);
     expect(card.getAttribute('aria-label')).toMatch(/1 av 1 klara/);
   });
 
   it('scroll-området går att nå med tangentbord', () => {
-    render(<Timeline todayIso={TODAY} milestones={[near, far]} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={[near, far]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     const region = screen.getByLabelText(/Tidslinje, scrolla horisontellt/);
     expect(region).toHaveAttribute('tabindex', '0');
     fireEvent.keyDown(region, { key: 'ArrowRight' });
@@ -69,7 +69,7 @@ describe('Timeline', () => {
       { id: 'w1', title: 'Fiktiv tidig', dueDate: '2025-01-01', tasks: [{ isDone: true }] },
       { id: 'w2', title: 'Fiktiv sen', dueDate: '2028-01-01', tasks: [{ isDone: false }] },
     ];
-    render(<Timeline todayIso={TODAY} milestones={wide} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={wide} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     const scroll = screen.getByLabelText(/Tidslinje, scrolla horisontellt/) as HTMLElement;
     // Idag ligger inte vid x=0, så scroll ska ha flyttats dit.
     expect(scroll.scrollLeft).toBeGreaterThan(0);
@@ -77,7 +77,7 @@ describe('Timeline', () => {
   });
 
   it('tom tidslinje renderar utan fel', () => {
-    render(<Timeline todayIso={TODAY} milestones={[]} windowDaysForStatus={28} />);
+    render(<Timeline todayIso={TODAY} milestones={[]} windowDaysForStatus={28} selectedId={null} onSelect={() => {}} />);
     expect(screen.getByText('Idag')).toBeInTheDocument();
   });
 });
