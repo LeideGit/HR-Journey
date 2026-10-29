@@ -47,11 +47,25 @@ node scripts/run-evals.mjs
 rc=$?
 if [ "$rc" -eq 0 ]; then ok "evals"; else fail "evals ej körda (kod $rc). Runner saknas."; fi
 
-step "Databas och RLS"
-if [ -d supabase/migrations ]; then
-  fail "migrationer finns men RLS-, Storage- och Auth-tester är ej konfigurerade"
+step "Databas och RLS (lokal Supabase)"
+if [ ! -d supabase/migrations ]; then
+  skip "RLS-tester. Inga migrationer än (FEAT-010)."
+elif ! command -v supabase >/dev/null 2>&1 || ! docker info >/dev/null 2>&1; then
+  skip "RLS-tester. Supabase CLI eller Docker saknas. Se project-preparations.md sektion 3."
 else
-  skip "RLS-, Storage- och Auth-tester. Inga migrationer än (FEAT-010)."
+  # Återskapa lokal databas från migrationer och seed, kör RLS-testet, och kontrollera utfallet.
+  supabase db reset --local >/dev/null 2>&1 || fail "supabase db reset misslyckades"
+  out=$(docker exec -i "$(docker ps --format '{{.Names}}' | grep supabase_db_ | head -1)" \
+        psql -U postgres -d postgres -v ON_ERROR_STOP=0 -f - < supabase/tests/rls_dokument.sql 2>&1)
+  echo "$out" | grep -E 'NOTICE: +TEST' | sed 's/^.*NOTICE: *//'
+  if echo "$out" | grep -q 'FAIL'; then
+    fail "RLS-test har FAIL-påståenden"
+  elif [ "$(echo "$out" | grep -c 'TEST .*: PASS')" -lt 7 ]; then
+    fail "RLS-testet gav färre än 7 PASS. Kontrollera utskriften."
+  else
+    ok "RLS- och Storage-tester (7 påståenden)"
+  fi
+  supabase db reset --local >/dev/null 2>&1
 fi
 
 step "Ej konfigurerade kontroller"

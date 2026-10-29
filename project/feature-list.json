@@ -103,7 +103,7 @@
       "id": "FEAT-010",
       "title": "Datamodell, RLS, Storage och migrationer",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-010-datamodell-rls-och-storage.md",
       "blocked_by": [],
       "implementation": null,

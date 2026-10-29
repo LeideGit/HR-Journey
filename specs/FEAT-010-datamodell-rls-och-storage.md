@@ -1,7 +1,7 @@
 # FEAT-010 Datamodell, RLS, Storage och migrationer
 
 - **FEAT-ID:** FEAT-010
-- **Status:** planned
+- **Status:** in-progress
 - **Scopeklassificering:** MVP (grund för alla andra FEAT)
 - **PRD-ID:** PP-009, PP-010, SEC-002, SEC-003, SEC-004, SEC-005, SEC-008, SEC-010, NFR-013, OPS-002, OPS-003, OPS-004, TEST-006, RISK-003, ADR-002, ADR-003, ADR-005, DEP-001, DEP-004, DEP-005
 
