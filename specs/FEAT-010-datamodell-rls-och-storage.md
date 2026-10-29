@@ -1,7 +1,7 @@
 # FEAT-010 Datamodell, RLS, Storage och migrationer
 
 - **FEAT-ID:** FEAT-010
-- **Status:** in-progress
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP (grund för alla andra FEAT)
 - **PRD-ID:** PP-009, PP-010, SEC-002, SEC-003, SEC-004, SEC-005, SEC-008, SEC-010, NFR-013, OPS-002, OPS-003, OPS-004, TEST-006, RISK-003, ADR-002, ADR-003, ADR-005, DEP-001, DEP-004, DEP-005
 
@@ -92,9 +92,13 @@ Exakt kolumnlista skrivs i migrationerna. Specen beskriver inte kolumner som än
 
 ## 11. Verifieringsevidens
 
-Ingen.
+- supabase/tests/rls_dokument.sql (7 PASS)
+- supabase/tests/rls_milestones.sql (6 PASS)
+- Hostat hr-journey: 4 migrationer tillämpade, RLS på 7 tabeller, bucket dokument privat
+- Hostat: seed inlagd (3 personer, 2 dokument, 3 versioner)
 
 ## 12. Öppna blockerare
 
-- Användarprovisionering (D-7). Ansvarig användaren. Blockerar hostad inloggning, inte lokal utveckling.
-- Reproducerbar migrationsstruktur och CLI-version är inte beslutad. [TBD] ansvarig utvecklaren. Nästa steg: första migration lokalt.
+- Storage-policytest mot hostat projekt
+- UI-koppling mot databas
+- Gallring och permanent radering (FR-DRET-003, ej implementerad)

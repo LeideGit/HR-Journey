@@ -63,8 +63,14 @@
 
 ## 9. Verifieringsevidens
 
-Ingen. Ingen implementation finns.
+- src/auth/LoginView.test.tsx (4 tester)
+- supabase/tests/rls_dokument.sql (roller och åtkomst)
+- Hostat: inloggning verifierad via Auth-API för båda konton; disable_signup=true
+- Lokalt: båda konton loggar in med lösenord demo (verifierat 2026-10-29)
+- Användarverifiering i webbläsare 2026-10-29
 
 ## 10. Öppna blockerare
 
-- B7 (provisionering): ansvarig användaren. Nästa steg: beslut när MVP-demon ska köras mot hostat projekt. Blockerar inte lokal utveckling. Blockerad feature: första inloggningstest mot hostat projekt.
+- Provisionering (D-7) ej beslutad; konton skapade manuellt
+- Test av inloggning i webbläsare i CI
+- Granskning: PR #2 mergad utan granskning, REVIEW.md ej uppfylld

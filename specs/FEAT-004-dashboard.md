@@ -1,7 +1,7 @@
 # FEAT-004 Dashboard och arbetskö
 
 - **FEAT-ID:** FEAT-004
-- **Status:** in-progress
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP
 - **PRD-ID:** PP-005, G-001, G-002, SK-001, SK-002, SK-013, FR-DASH-001 till FR-DASH-008, AC-002, NFR-001, OQ-001
 
@@ -55,8 +55,12 @@
 
 ## 9. Verifieringsevidens
 
-Ingen.
+- src/dashboard/queue.test.ts (filter, sortering, KPI)
+- src/dashboard/Dashboard.test.tsx (UI, filter, tomt läge, fiktiv-märkning)
+- src/milestones/status.test.ts (statusregler)
 
 ## 10. Öppna blockerare
 
-- **OQ-001.** Ansvarig användaren. Nästa steg: bekräfta eller ändra förslaget i FEAT-004-B4. Blockerar AC-FEAT-004-4 och TEST-001 för gränsfall.
+- OQ-001 (gräns Kommande/Aktuellt): ansvarig användaren. Nästa steg: bekräfta eller ändra förslaget i FEAT-004-B4. Blockerar AC-FEAT-004-4 och TEST-001 för gränsfall.
+- Koppling till hostad data (använder fixtures)
+- Granskning av PR-ändringar för dashboard

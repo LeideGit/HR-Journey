@@ -4,7 +4,7 @@ Genererad av `scripts/generate-reports.mjs`. Redigera inte för hand.
 
 ## Beslut
 
-**EJ REDO för release.** 5 in-progress, 7 planned.
+**EJ REDO för release.** 6 in-progress, 6 planned.
 
 Ingen feature har implementation. Completion-gate i REVIEW.md är inte uppfylld för någon feature.
 
@@ -13,7 +13,7 @@ Ingen feature har implementation. Completion-gate i REVIEW.md är inte uppfylld 
 | FEAT | Titel | Scope | Status | Blockerad av |
 |---|---|---|---|---|
 | FEAT-001 | Autentisering och roller | MVP | in-progress | D-7 |
-| FEAT-002 | Personprofil och visuell tidslinje | MVP | planned | OQ-003, B12 |
+| FEAT-002 | Personprofil och visuell tidslinje | MVP | in-progress | OQ-003 stängd av användaren 2026-10-29 (skala enligt beslut) |
 | FEAT-003 | Profiler, tidslinjemallar, milestones och tasks | MVP | in-progress | OQ-002, del: FR-TMPL-002, del: FR-TMPL-003, del: TEST-004 |
 | FEAT-004 | Dashboard och arbetskö | MVP | in-progress | OQ-001 |
 | FEAT-005 | Simulerade mejl | MVP | planned | B6 |
@@ -31,7 +31,7 @@ Ingen feature har implementation. Completion-gate i REVIEW.md är inte uppfylld 
 |---|---|---|---|
 | OQ-001 | Gräns mellan Kommande och Aktuellt | user | open |
 | OQ-002 | Konfliktregel för mallpropagering | user | deferred by user (D-6) |
-| OQ-003 | Exakt tidslinjeskala | user | open |
+| OQ-003 | Exakt tidslinjeskala | user | closed 2026-10-29 av användaren: skalan anpassas efter närliggande händelser, högst 6 månader framåt, scroll för längre fram |
 | OQ-004 | Previewteknik för Office-dokument | user | open |
 | D-7 | Användarprovisionering | user | deferred by user, demo MVP |
 
