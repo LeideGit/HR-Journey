@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Dashboard } from './dashboard/Dashboard';
+import { PersonPage } from './person/PersonPage';
+import { fixturePersons } from './dashboard/fixtures';
 import { LoginView } from './auth/LoginView';
 import { supabase, authConfigured } from './auth/supabase';
 
-// Startsida. Visar inloggning om inget konto är inloggat. Fiktiv testmiljö (FEAT-012-B4).
-// Gäller endast när auth är konfigurerad. Utan konfiguration visas inloggningsfelet.
+// Startsida: inloggning, sedan arbetskön. Personsidan öppnas från dashboarden.
+// Fiktiv testmiljö (FEAT-012-B4). Vyn växlas med state, eftersom projektet saknar router.
 export function App() {
   const [signedIn, setSignedIn] = useState<boolean | null>(authConfigured ? null : false);
+  const [personId, setPersonId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!supabase) return;
@@ -25,5 +28,10 @@ export function App() {
 
   if (signedIn === null) return null;
   if (!signedIn) return <LoginView onSignedIn={() => setSignedIn(true)} />;
-  return <Dashboard />;
+
+  const person = personId ? fixturePersons.find((p) => p.id === personId) : undefined;
+  if (person) {
+    return <PersonPage person={person} onBack={() => setPersonId(null)} />;
+  }
+  return <Dashboard onOpenPerson={setPersonId} />;
 }

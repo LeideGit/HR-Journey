@@ -11,12 +11,12 @@ afterEach(() => {
 
 describe('Dashboard', () => {
   it('visar fiktiv testmiljö-märkning (FEAT-012-AC-4)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     expect(screen.getByRole('status')).toHaveTextContent('Fiktiv testmiljö');
   });
 
   it('visar KPI-kort med antal från statusberäkningen (FR-DASH-002)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     const kpis = screen.getByLabelText('Översikt');
     // Fixtures med FIXTURE_TODAY 2026-10-29 och 28 dagars fönster: 2 försenade, 1 aktuell, 2 kommande.
     expect(within(kpis).getByText('Försenade').previousElementSibling).toHaveTextContent('2');
@@ -25,7 +25,7 @@ describe('Dashboard', () => {
   });
 
   it('listar milestones med status och person (SK-001)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     const panel = screen.getByRole('heading', { name: 'Milestones som behöver uppmärksamhet' }).closest('section');
     expect(panel).not.toBeNull();
     const rows = within(panel as HTMLElement).getAllByRole('row');
@@ -36,14 +36,14 @@ describe('Dashboard', () => {
   });
 
   it('filtrerar på profiltyp (SK-002)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     fireEvent.change(screen.getByLabelText('Profiltyp'), { target: { value: 'konsult' } });
     expect(screen.queryByText('Fiktiv Anna Exempel')).not.toBeInTheDocument();
     expect(screen.getByText('Fiktiv Bo Testsson')).toBeInTheDocument();
   });
 
   it('kombinerar profiltyp och status (FR-DASH-005)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     fireEvent.change(screen.getByLabelText('Profiltyp'), { target: { value: 'anstalld' } });
     fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'forsenad' } });
     expect(screen.getByText('Fiktiv Anna Exempel')).toBeInTheDocument();
@@ -51,14 +51,14 @@ describe('Dashboard', () => {
   });
 
   it('visar tomt läge när inget matchar (FEAT-004 AC-1)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     fireEvent.change(screen.getByLabelText('Profiltyp'), { target: { value: 'lia' } });
     fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'forsenad' } });
     expect(screen.getByText('Inga milestones matchar filtret.')).toBeInTheDocument();
   });
 
   it('rensa filter återställer listan (FR-DASH-005)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     fireEvent.change(screen.getByLabelText('Profiltyp'), { target: { value: 'lia' } });
     expect(screen.queryByText('Fiktiv Bo Testsson')).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Rensa filter' }));
@@ -66,7 +66,7 @@ describe('Dashboard', () => {
   });
 
   it('visar dokumentärenden i samma vy men i egen tabell (FR-DASH-006, FR-DASH-007)', () => {
-    render(<Dashboard />);
+    render(<Dashboard onOpenPerson={() => {}} />);
     expect(screen.getByRole('heading', { name: 'Dokument som behöver hanteras' })).toBeInTheDocument();
     expect(screen.getByText('Fiktiv konsultpolicy 2026')).toBeInTheDocument();
   });
