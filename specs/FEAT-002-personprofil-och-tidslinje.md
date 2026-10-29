@@ -12,7 +12,7 @@
 | FEAT-002-B1 | Dedikerad profilsida visar namn, profiltyp, avdelning, chef, e-post och period (FR-PERSON-001, FR-PERSON-002). | supported |
 | FEAT-002-B2 | Tidslinjen är primär komponent och kronologisk (FR-VTL-001, FR-PERSON-003). | supported |
 | FEAT-002-B3 | X-position bestäms av milestonens datum (FR-VTL-002, AC-004). | supported |
-| FEAT-002-B4 | Dåtid, nutid och framtid syns, och dagens datum markeras (FR-VTL-003, FR-VTL-013). | supported |
+| FEAT-002-B4 | Dåtid, nutid och framtid syns, och dagens datum markeras (FR-VTL-003, FR-VTL-013). Tidslinjen öppnas alltid med idag synligt i vyn. Scroll flyttas dit vid montering och när dagens datum ändras (användarbeslut 2026-10-29). | supported |
 | FEAT-002-B5 | Milestones är interaktiva rutor med titel, datum och status (FR-VTL-004). | supported |
 | FEAT-002-B6 | Kommande, Aktuellt, Försenad och Slutförd särskiljs utan enbart färg (FR-VTL-005, WCAG). | supported |
 | FEAT-002-B7 | Ljus statusnyans som bakgrund (FR-VTL-006). | supported |

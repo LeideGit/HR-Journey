@@ -1,5 +1,5 @@
-import { useMemo, useRef } from 'react';
-import { computeScale, xFor, assignLanes, addMonths } from './scale';
+import { useEffect, useMemo, useRef } from 'react';
+import { computeScale, xFor, assignLanes, addMonths, scrollLeftToCenter } from './scale';
 import { beraknaStatus, toDayNumber, type MilestoneStatus, type TaskState } from '../milestones/status';
 
 // Tidslinje för en person. FEAT-002, PRD: FR-VTL-001 till FR-VTL-015, AC-004, SK-004, SK-005.
@@ -68,6 +68,14 @@ export function Timeline({ todayIso, milestones, windowDaysForStatus, monthForma
   }, [scale.canvasStart, scale.canvasEnd]);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Idag ska alltid synas när tidslinjen öppnas (FEAT-002-B4). Scrolla dit när komponenten
+  // monteras och när dagens datum ändras. Vyn utan scroll-stöd hoppar över detta.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollLeft = scrollLeftToCenter(todayX, el.clientWidth, canvasWidth);
+  }, [todayX, canvasWidth]);
 
   function onKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
     const el = scrollRef.current;

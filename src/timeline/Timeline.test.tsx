@@ -1,5 +1,5 @@
 import { cleanup, render, screen, fireEvent } from '@testing-library/react';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Timeline, type TimelineMilestone } from './Timeline';
 
 // FEAT-002: FR-VTL-003, FR-VTL-004, FR-VTL-005, FR-VTL-013, FR-VTL-015, AC-FEAT-002-1..4, SK-005, OQ-003.
@@ -59,6 +59,21 @@ describe('Timeline', () => {
     expect(region).toHaveAttribute('tabindex', '0');
     fireEvent.keyDown(region, { key: 'ArrowRight' });
     fireEvent.keyDown(region, { key: 'ArrowLeft' });
+  });
+
+  it('öppnas med idag synligt i vyn, inte vid start av canvas (FEAT-002-B4)', () => {
+    // Stubba layout, eftersom jsdom saknar riktig layout. Vyn 400px.
+    // Händelser långt bak och långt fram gör canvas bredare än vyn, så idag hamnar inne i canvas.
+    const widthSpy = vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(400);
+    const wide: TimelineMilestone[] = [
+      { id: 'w1', title: 'Fiktiv tidig', dueDate: '2025-01-01', tasks: [{ isDone: true }] },
+      { id: 'w2', title: 'Fiktiv sen', dueDate: '2028-01-01', tasks: [{ isDone: false }] },
+    ];
+    render(<Timeline todayIso={TODAY} milestones={wide} windowDaysForStatus={28} />);
+    const scroll = screen.getByLabelText(/Tidslinje, scrolla horisontellt/) as HTMLElement;
+    // Idag ligger inte vid x=0, så scroll ska ha flyttats dit.
+    expect(scroll.scrollLeft).toBeGreaterThan(0);
+    widthSpy.mockRestore();
   });
 
   it('tom tidslinje renderar utan fel', () => {
