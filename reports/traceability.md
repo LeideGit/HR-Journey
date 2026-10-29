@@ -8,8 +8,8 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 |---|---|---|---|---|---|
 | AC-001 | FEAT-001 | finns | ingen | ej körd | ej genomförd |
 | AC-002 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
-| AC-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| AC-004 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| AC-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| AC-004 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | AC-005 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | AC-006 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | AC-007 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
@@ -55,9 +55,9 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | AC-M365-MVP-010 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | ADR-001 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | ADR-002 | FEAT-001, FEAT-010 | finns | ingen | ej körd | ej genomförd |
-| ADR-003 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| ADR-003 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | ADR-004 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
-| ADR-005 | FEAT-007, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| ADR-005 | FEAT-007, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | ADR-006 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | ADR-007 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | ADR-008 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
@@ -90,11 +90,11 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | BL-016 | FEAT-006, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | BL-017 | FEAT-001, FEAT-011 | finns | ingen | ej körd | ej genomförd |
 | BL-018 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
-| DEP-001 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| DEP-001 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | DEP-002 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | DEP-003 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
-| DEP-004 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
-| DEP-005 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| DEP-004 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
+| DEP-005 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | DEP-006 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
 | DEP-007 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | DEP-008 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
@@ -157,7 +157,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | FR-AI-SRC-006 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
 | FR-AI-SRC-007 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
 | FR-DARCH-001 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
-| FR-DARCH-002 | FEAT-002, FEAT-006 | ingen | ingen | ej körd | ej genomförd |
+| FR-DARCH-002 | FEAT-002, FEAT-006 | finns | ingen | ej körd | ej genomförd |
 | FR-DASH-001 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | FR-DASH-002 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | FR-DASH-003 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
@@ -178,9 +178,9 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | FR-DOC-010 | FEAT-006, FEAT-009 | ingen | ingen | ej körd | ej genomförd |
 | FR-DOC-011 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | FR-DRET-001 | FEAT-006, FEAT-011 | ingen | ingen | ej körd | ej genomförd |
-| FR-DRET-002 | FEAT-006, FEAT-009, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
-| FR-DRET-003 | FEAT-006, FEAT-009 | ingen | ingen | ej körd | ej genomförd |
-| FR-DRET-004 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| FR-DRET-002 | FEAT-006, FEAT-009, FEAT-010 | finns | ingen | ej körd | ej genomförd |
+| FR-DRET-003 | FEAT-006, FEAT-009, FEAT-010 | finns | ingen | ej körd | ej genomförd |
+| FR-DRET-004 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | FR-DSRCH-001 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | FR-DSRCH-002 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | FR-DSRCH-003 | FEAT-006, FEAT-007 | ingen | ingen | ej körd | ej genomförd |
@@ -188,7 +188,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | FR-DSRCH-005 | FEAT-004, FEAT-006 | finns | ingen | ej körd | ej genomförd |
 | FR-DVAL-001 | FEAT-006, FEAT-011 | ingen | ingen | ej körd | ej genomförd |
 | FR-DVAL-002 | FEAT-006, FEAT-011 | ingen | ingen | ej körd | ej genomförd |
-| FR-DVAL-003 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| FR-DVAL-003 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | FR-DVER-001 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | FR-DVER-002 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | FR-DVER-003 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
@@ -244,11 +244,11 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | FR-MILE-004 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-MILE-005 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-MILE-006 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
-| FR-PERSON-001 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-PERSON-002 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-PERSON-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-PERSON-004 | FEAT-002, FEAT-009 | ingen | ingen | ej körd | ej genomförd |
-| FR-PERSON-005 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| FR-PERSON-001 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-PERSON-002 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-PERSON-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-PERSON-004 | FEAT-002, FEAT-009 | finns | ingen | ej körd | ej genomförd |
+| FR-PERSON-005 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | FR-PROF-001 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-PROF-002 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-PROF-003 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
@@ -260,29 +260,29 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | FR-TMPL-003 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-TMPL-004 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-TMPL-005 | FEAT-003, FEAT-009 | finns | ingen | ej körd | ej genomförd |
-| FR-VTL-001 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-002 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-004 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-005 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-006 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| FR-VTL-001 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-002 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-004 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-005 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-006 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-007 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-008 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-009 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-010 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-011 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
-| FR-VTL-012 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-013 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-014 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| FR-VTL-015 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| FR-VTL-012 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-013 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-014 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| FR-VTL-015 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-016 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-017 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-018 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | FR-VTL-019 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | G-001 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | G-002 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
-| G-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| G-004 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| G-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| G-004 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | G-005 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | G-006 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | G-007 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
@@ -295,7 +295,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | G-014 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | G-015 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | NFR-001 | FEAT-002, FEAT-004 | finns | ingen | ej körd | ej genomförd |
-| NFR-002 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| NFR-002 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | NFR-003 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | NFR-004 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | NFR-005 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
@@ -306,13 +306,13 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | NFR-010 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | NFR-011 | FEAT-002, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | NFR-012 | FEAT-002, FEAT-012 | finns | ingen | ej körd | ej genomförd |
-| NFR-013 | FEAT-009, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| NFR-013 | FEAT-009, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | NFR-014 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | NFR-015 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | OPS-001 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
-| OPS-002 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
-| OPS-003 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
-| OPS-004 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| OPS-002 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
+| OPS-003 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
+| OPS-004 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | OPS-005 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | OPS-006 | FEAT-008, FEAT-011 | ingen | ingen | ej körd | ej genomförd |
 | OPS-007 | FEAT-012 | finns | ingen | ej körd | ej genomförd |
@@ -321,7 +321,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | OPS-010 | FEAT-005, FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | OQ-001 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | OQ-002 | FEAT-003, FEAT-011 | finns | ingen | ej körd | ej genomförd |
-| OQ-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| OQ-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | OQ-004 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | OQ-AI-001 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
 | OQ-AI-002 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
@@ -336,13 +336,13 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | OQ-M365-008 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | OQ-M365-009 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | OQ-M365-010 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
-| PP-001 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| PP-002 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| PP-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| PP-001 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| PP-002 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| PP-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | PP-004 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | PP-005 | FEAT-003, FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | PP-006 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
-| PP-007 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| PP-007 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | PP-008 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | PP-009 | FEAT-001, FEAT-004, FEAT-010, FEAT-011 | finns | ingen | ej körd | ej genomförd |
 | PP-010 | FEAT-003, FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
@@ -355,7 +355,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | PP-017 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | PP-018 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | PP-019 | FEAT-008, FEAT-012 | finns | ingen | ej körd | ej genomförd |
-| PP-020 | FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| PP-020 | FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | RISK-001 | FEAT-005, FEAT-006, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | RISK-002 | FEAT-001, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | RISK-003 | FEAT-001, FEAT-010, FEAT-012 | finns | ingen | ej körd | ej genomförd |
@@ -376,16 +376,16 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | RISK-018 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | RISK-019 | FEAT-003, FEAT-010, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | RISK-020 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
-| SEC-001 | FEAT-005, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| SEC-001 | FEAT-005, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | SEC-002 | FEAT-001, FEAT-010 | finns | ingen | ej körd | ej genomförd |
-| SEC-003 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| SEC-003 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | SEC-004 | FEAT-001, FEAT-010, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | SEC-005 | FEAT-001, FEAT-010, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | SEC-006 | FEAT-001, FEAT-011 | finns | ingen | ej körd | ej genomförd |
 | SEC-007 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
-| SEC-008 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| SEC-008 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | SEC-009 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
-| SEC-010 | FEAT-006, FEAT-010 | ingen | ingen | ej körd | ej genomförd |
+| SEC-010 | FEAT-006, FEAT-010 | finns | ingen | ej körd | ej genomförd |
 | SEC-011 | FEAT-007, FEAT-012 | finns | ingen | ej körd | ej genomförd |
 | SEC-012 | FEAT-007 | ingen | ingen | ej körd | ej genomförd |
 | SEC-013 | FEAT-007 | ingen | EVAL-AI-003 | ej körd | ej genomförd |
@@ -393,7 +393,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | SEC-015 | FEAT-007 | ingen | EVAL-AI-004 | ej körd | ej genomförd |
 | SEC-016 | FEAT-001, FEAT-008 | finns | ingen | ej körd | ej genomförd |
 | SEC-017 | FEAT-008, FEAT-009 | ingen | ingen | ej körd | ej genomförd |
-| SEC-018 | FEAT-002, FEAT-009 | ingen | ingen | ej körd | ej genomförd |
+| SEC-018 | FEAT-002, FEAT-009 | finns | ingen | ej körd | ej genomförd |
 | SEC-019 | FEAT-005, FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | SEC-020 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | SEC-021 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
@@ -413,9 +413,9 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | SEC-M365-012 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | SK-001 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | SK-002 | FEAT-004 | finns | ingen | ej körd | ej genomförd |
-| SK-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| SK-004 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
-| SK-005 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| SK-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| SK-004 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
+| SK-005 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | SK-006 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | SK-007 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | SK-008 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
@@ -434,7 +434,7 @@ PRD: PRD-HR-Journey-v002.md. PRD-ID totalt: 464.
 | SK-021 | FEAT-008 | ingen | ingen | ej körd | ej genomförd |
 | TEST-001 | FEAT-003, FEAT-004 | finns | ingen | ej körd | ej genomförd |
 | TEST-002 | FEAT-002, FEAT-003 | finns | ingen | ej körd | ej genomförd |
-| TEST-003 | FEAT-002 | ingen | ingen | ej körd | ej genomförd |
+| TEST-003 | FEAT-002 | finns | ingen | ej körd | ej genomförd |
 | TEST-004 | FEAT-003 | finns | ingen | ej körd | ej genomförd |
 | TEST-005 | FEAT-006 | ingen | ingen | ej körd | ej genomförd |
 | TEST-006 | FEAT-001, FEAT-006, FEAT-009, FEAT-010, FEAT-011 | finns | ingen | ej körd | ej genomförd |

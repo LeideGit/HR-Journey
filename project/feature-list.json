@@ -20,28 +20,46 @@
       ],
       "evidence": [
         "src/auth/LoginView.test.tsx (4 tester)",
-        "supabase/tests/rls_dokument.sql (roller)",
-        "Hostat: inloggning verifierad via Auth-API för båda konton; självregistrering avstängd (disable_signup=true)",
-        "Användarverifiering i webbläsare av användaren 2026-10-29"
+        "supabase/tests/rls_dokument.sql (roller och åtkomst)",
+        "Hostat: inloggning verifierad via Auth-API för båda konton; disable_signup=true",
+        "Lokalt: båda konton loggar in med lösenord demo (verifierat 2026-10-29)",
+        "Användarverifiering i webbläsare 2026-10-29"
       ],
       "not_yet": [
-        "Provisionering (D-7) är inte beslutad; konton är skapade manuellt",
-        "Full e2e-test av inloggning i webbläsare i CI",
-        "Granskning: PR #2 mergad utan granskning, REVIEW.md-krav ej uppfyllt"
+        "Provisionering (D-7) ej beslutad; konton skapade manuellt",
+        "Test av inloggning i webbläsare i CI",
+        "Granskning: PR #2 mergad utan granskning, REVIEW.md ej uppfylld"
       ]
     },
     {
       "id": "FEAT-002",
       "title": "Personprofil och visuell tidslinje",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-002-personprofil-och-tidslinje.md",
       "blocked_by": [
-        "OQ-003",
-        "B12"
+        "OQ-003 stängd av användaren 2026-10-29 (skala enligt beslut)"
       ],
-      "implementation": null,
-      "evidence": null
+      "implementation": [
+        "src/timeline/scale.ts",
+        "src/timeline/Timeline.tsx",
+        "src/person/PersonPage.tsx",
+        "src/person/person.css",
+        "src/dashboard/Dashboard.tsx"
+      ],
+      "evidence": [
+        "src/timeline/scale.test.ts (17 tester, OQ-003 skala och positionsregel)",
+        "src/timeline/Timeline.test.tsx (kort, idag, scroll, tangentbord)",
+        "src/person/PersonPage.test.tsx (9 tester)",
+        "Idag i mitten vid öppning: scroll-regel testad, PR #7 mergad 2026-10-29"
+      ],
+      "not_yet": [
+        "Koppling till hostad data (använder fixtures)",
+        "Flikarna Dokument och Historik (platshållare)",
+        "Drag-and-drop av milestones (FR-VTL-009, kräver backend och rollback)",
+        "Visuell och tillgänglighetstest (NFR-012)",
+        "Granskning: PR #6 och #7 mergade utan granskning"
+      ]
     },
     {
       "id": "FEAT-003",
@@ -64,6 +82,11 @@
       "evidence": [
         "src/milestones/status.test.ts (16 tester med dashboard-status för FEAT-004 ingår inte)",
         "supabase/tests/rls_milestones.sql (6 PASS)"
+      ],
+      "not_yet": [
+        "OQ-002 (konfliktregel mallpropagering): avvaktad av användaren (D-6). Blockerar B12, B13, B15, TEST-004. Nästa steg: beslut om konfliktregel.",
+        "B18 (bibliotek för milestones): ansvarig användaren. Nästa steg: bekräfta förslaget. [TBD].",
+        "Malltabeller och UI för milestones"
       ]
     },
     {
@@ -88,9 +111,9 @@
         "src/milestones/status.test.ts (statusregler)"
       ],
       "not_yet": [
-        "Koppling till Supabase (använder fixtures)",
-        "Kommande/Aktuellt-gräns (OQ-001, windowDays är parameter)",
-        "Milestone-tabell kopplad till UI (FEAT-003 in-progress)"
+        "OQ-001 (gräns Kommande/Aktuellt): ansvarig användaren. Nästa steg: bekräfta eller ändra förslaget i FEAT-004-B4. Blockerar AC-FEAT-004-4 och TEST-001 för gränsfall.",
+        "Koppling till hostad data (använder fixtures)",
+        "Granskning av PR-ändringar för dashboard"
       ]
     },
     {
@@ -179,8 +202,24 @@
       "status": "in-progress",
       "spec": "specs/FEAT-010-datamodell-rls-och-storage.md",
       "blocked_by": [],
-      "implementation": null,
-      "evidence": null
+      "implementation": [
+        "supabase/migrations/20261029110000_roller_och_personer.sql",
+        "supabase/migrations/20261029120000_dokument_och_versioner.sql",
+        "supabase/migrations/20261029130000_privat_storage.sql",
+        "supabase/migrations/20261029140000_milestones_och_tasks.sql",
+        "supabase/seed.sql"
+      ],
+      "evidence": [
+        "supabase/tests/rls_dokument.sql (7 PASS)",
+        "supabase/tests/rls_milestones.sql (6 PASS)",
+        "Hostat hr-journey: 4 migrationer tillämpade, RLS på 7 tabeller, bucket dokument privat",
+        "Hostat: seed inlagd (3 personer, 2 dokument, 3 versioner)"
+      ],
+      "not_yet": [
+        "Storage-policytest mot hostat projekt",
+        "UI-koppling mot databas",
+        "Gallring och permanent radering (FR-DRET-003, ej implementerad)"
+      ]
     },
     {
       "id": "FEAT-011",
@@ -210,7 +249,7 @@
         "vite.config.ts"
       ],
       "evidence": [
-        "CI på main: verify, rls, build-pages, deploy grönt (run 40869716851)",
+        "CI på main grönt: verify, rls, build-pages, deploy (senaste körning efter PR #7)",
         "https://leidegit.github.io/HR-Journey/ svarar HTTP 200",
         "Bygget innehåller publik nyckel och inga sb_secret_-värden"
       ],
@@ -218,7 +257,7 @@
         "evals-runner (verify röd, släppt tillsvidare)",
         "Automatiserad PR-granskning och säkerhetsgranskning (REVIEW.md 4–5)",
         "Visuell och tillgänglighetstest (NFR-012)",
-        "Inga granskningar på PR #2"
+        "Granskningar saknas på PR #2, #6, #7"
       ]
     }
   ],
@@ -247,7 +286,8 @@
       "owner": "user",
       "blocks": [
         "FEAT-002"
-      ]
+      ],
+      "status": "closed 2026-10-29 av användaren: skalan anpassas efter närliggande händelser, högst 6 månader framåt, scroll för längre fram"
     },
     {
       "id": "OQ-004",

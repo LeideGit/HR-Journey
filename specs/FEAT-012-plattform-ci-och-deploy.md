@@ -1,7 +1,7 @@
 # FEAT-012 Plattform, CI och GitHub Pages-deploy
 
 - **FEAT-ID:** FEAT-012
-- **Status:** in-progress
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP
 - **PRD-ID:** NFR-010, NFR-011, NFR-012, NFR-014, OPS-001, OPS-007, OPS-008, OPS-009, TEST-OPS-001, TEST-OPS-002, TEST-SEC-002, DEP-002, DEP-003, ARCH-M365-001, RISK-019, RISK-002, RISK-003, SEC-004, SEC-005, PP-019, FR-AI-FUT-004, SEC-011
 
@@ -67,9 +67,13 @@ Ingen.
 
 ## 9. Verifieringsevidens
 
-Ingen.
+- CI på main grönt: verify, rls, build-pages, deploy (senaste körning efter PR #7)
+- https://leidegit.github.io/HR-Journey/ svarar HTTP 200
+- Bygget innehåller publik nyckel och inga sb_secret_-värden
 
 ## 10. Öppna blockerare
 
-- Routing på GitHub Pages (404-fallback eller hash-routing). Ansvarig utvecklaren. Nästa steg: välj metod. [TBD].
-- Inget av detta blockerar FEAT-010 eller FEAT-007.
+- evals-runner (verify röd, släppt tillsvidare)
+- Automatiserad PR-granskning och säkerhetsgranskning (REVIEW.md 4–5)
+- Visuell och tillgänglighetstest (NFR-012)
+- Granskningar saknas på PR #2, #6, #7

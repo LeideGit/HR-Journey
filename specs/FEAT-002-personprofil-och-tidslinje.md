@@ -1,7 +1,7 @@
 # FEAT-002 Personprofil och visuell tidslinje
 
 - **FEAT-ID:** FEAT-002
-- **Status:** planned
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP
 - **PRD-ID:** PP-001, PP-002, PP-003, PP-004, G-003, G-004, SK-003, SK-004, SK-005, FR-PERSON-001 till FR-PERSON-005, FR-VTL-001 till FR-VTL-019, AC-003, AC-004, NFR-001, NFR-002, TEST-002, TEST-003
 
@@ -64,9 +64,15 @@
 
 ## 9. Verifieringsevidens
 
-Ingen.
+- src/timeline/scale.test.ts (17 tester, OQ-003 skala och positionsregel)
+- src/timeline/Timeline.test.tsx (kort, idag, scroll, tangentbord)
+- src/person/PersonPage.test.tsx (9 tester)
+- Idag i mitten vid öppning: scroll-regel testad, PR #7 mergad 2026-10-29
 
 ## 10. Öppna blockerare
 
-- OQ-003 (tidsskala). Ansvarig användaren. Nästa steg: välj standard. [TBD] tills dess. Blockerar inte grundtidslinjen.
-- B12 (personarkivering). Ansvarig användaren. Nästa steg: bekräfta att personarkivering ska finnas i MVP. Blockerad feature: arkiveringsknapp.
+- Koppling till hostad data (använder fixtures)
+- Flikarna Dokument och Historik (platshållare)
+- Drag-and-drop av milestones (FR-VTL-009, kräver backend och rollback)
+- Visuell och tillgänglighetstest (NFR-012)
+- Granskning: PR #6 och #7 mergade utan granskning

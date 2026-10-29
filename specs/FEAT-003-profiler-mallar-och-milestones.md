@@ -1,7 +1,7 @@
 # FEAT-003 Profiler, tidslinjemallar, milestones och tasks
 
 - **FEAT-ID:** FEAT-003
-- **Status:** in-progress
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP, med blockerad delfunktion (mallpropagering)
 - **PRD-ID:** PP-004, PP-005, PP-010, G-005, G-006, SK-006, SK-007, SK-008, SK-010, FR-PROF-001 till FR-PROF-006, FR-TMPL-001 till FR-TMPL-005, FR-MILE-001 till FR-MILE-006, FR-VTL-007, FR-VTL-008, FR-VTL-009, FR-VTL-010, FR-VTL-011, FR-VTL-016, FR-VTL-017, FR-VTL-018, FR-VTL-019, AC-005, AC-006, TEST-004, OQ-002, FR-M365-MVP-001
 
@@ -72,9 +72,11 @@
 
 ## 9. Verifieringsevidens
 
-Ingen.
+- src/milestones/status.test.ts (16 tester med dashboard-status för FEAT-004 ingår inte)
+- supabase/tests/rls_milestones.sql (6 PASS)
 
 ## 10. Öppna blockerare
 
-- **OQ-002 (konfliktregel för mallpropagering).** Avvaktad på användarens beslut (D-6). Blockerar B12, B13, B15 och TEST-004. Ansvarig användaren. Nästa steg: beslut om konfliktregel. Övrig funktion får byggas.
-- B18 (bibliotek för milestones). Ansvarig användaren. Nästa steg: bekräfta förslaget. [TBD].
+- OQ-002 (konfliktregel mallpropagering): avvaktad av användaren (D-6). Blockerar B12, B13, B15, TEST-004. Nästa steg: beslut om konfliktregel.
+- B18 (bibliotek för milestones): ansvarig användaren. Nästa steg: bekräfta förslaget. [TBD].
+- Malltabeller och UI för milestones
