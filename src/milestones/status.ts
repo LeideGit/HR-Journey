@@ -72,7 +72,7 @@ export function progress(tasks: TaskState[]): { done: number; total: number; per
   return { done, total, percent };
 }
 
-function toDayNumber(iso: string): number {
+export function toDayNumber(iso: string): number {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
     throw new Error(`Ogiltigt datum: ${iso}`);
   }

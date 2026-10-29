@@ -28,3 +28,6 @@ graphify-out/
 
 # Personal Claude Code settings, not shared
 .claude/settings.local.json
+
+# TypeScript build info (incremental build cache)
+*.tsbuildinfo

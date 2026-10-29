@@ -61,10 +61,21 @@
         "OQ-001"
       ],
       "implementation": [
-        "src/milestones/status.ts (statusberäkning, OQ-001 ej beslutad)"
+        "src/dashboard/Dashboard.tsx",
+        "src/dashboard/queue.ts",
+        "src/dashboard/dashboard.css",
+        "src/dashboard/fixtures.ts",
+        "src/milestones/status.ts"
       ],
       "evidence": [
-        "src/milestones/status.test.ts"
+        "src/dashboard/queue.test.ts (filter, sortering, KPI)",
+        "src/dashboard/Dashboard.test.tsx (UI, filter, tomt läge, fiktiv-märkning)",
+        "src/milestones/status.test.ts (statusregler)"
+      ],
+      "not_yet": [
+        "Koppling till Supabase (använder fixtures)",
+        "Kommande/Aktuellt-gräns (OQ-001, windowDays är parameter)",
+        "Milestone-tabell kopplad till UI (FEAT-003 in-progress)"
       ]
     },
     {
