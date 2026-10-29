@@ -1,7 +1,7 @@
 # FEAT-001 Autentisering och roller
 
 - **FEAT-ID:** FEAT-001
-- **Status:** planned (se `project/feature-list.json`)
+- **Status:** in-progress (se `project/feature-list.json`)
 - **Scopeklassificering:** MVP
 - **PRD-ID:** AC-001, PP-009, SEC-002, SEC-004, SEC-005, SEC-006, FR-DOC-008, FR-AI-HIST-003, section 5.1, section 5.2, section 5.3, BL-014, BL-017
 - **Ägare:** [TBD] ansvarig: användaren. Nästa steg: godkänna rollmodellen (klar, D-5).

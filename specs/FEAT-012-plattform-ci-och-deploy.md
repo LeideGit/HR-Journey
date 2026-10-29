@@ -1,7 +1,7 @@
 # FEAT-012 Plattform, CI och GitHub Pages-deploy
 
 - **FEAT-ID:** FEAT-012
-- **Status:** planned
+- **Status:** in-progress
 - **Scopeklassificering:** MVP
 - **PRD-ID:** NFR-010, NFR-011, NFR-012, NFR-014, OPS-001, OPS-007, OPS-008, OPS-009, TEST-OPS-001, TEST-OPS-002, TEST-SEC-002, DEP-002, DEP-003, ARCH-M365-001, RISK-019, RISK-002, RISK-003, SEC-004, SEC-005, PP-019, FR-AI-FUT-004, SEC-011
 

@@ -7,13 +7,28 @@
       "id": "FEAT-001",
       "title": "Autentisering och roller",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-001-autentisering-och-roller.md",
       "blocked_by": [
         "D-7"
       ],
-      "implementation": null,
-      "evidence": null
+      "implementation": [
+        "src/auth/supabase.ts",
+        "src/auth/LoginView.tsx",
+        "src/App.tsx",
+        "supabase/migrations/20261029110000_roller_och_personer.sql"
+      ],
+      "evidence": [
+        "src/auth/LoginView.test.tsx (4 tester)",
+        "supabase/tests/rls_dokument.sql (roller)",
+        "Hostat: inloggning verifierad via Auth-API för båda konton; självregistrering avstängd (disable_signup=true)",
+        "Användarverifiering i webbläsare av användaren 2026-10-29"
+      ],
+      "not_yet": [
+        "Provisionering (D-7) är inte beslutad; konton är skapade manuellt",
+        "Full e2e-test av inloggning i webbläsare i CI",
+        "Granskning: PR #2 mergad utan granskning, REVIEW.md-krav ej uppfyllt"
+      ]
     },
     {
       "id": "FEAT-002",
@@ -186,11 +201,25 @@
       "id": "FEAT-012",
       "title": "Plattform, CI och GitHub Pages-deploy",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-012-plattform-ci-och-deploy.md",
       "blocked_by": [],
-      "implementation": null,
-      "evidence": null
+      "implementation": [
+        ".github/workflows/ci.yml",
+        "scripts/validate-specs.mjs",
+        "vite.config.ts"
+      ],
+      "evidence": [
+        "CI på main: verify, rls, build-pages, deploy grönt (run 40869716851)",
+        "https://leidegit.github.io/HR-Journey/ svarar HTTP 200",
+        "Bygget innehåller publik nyckel och inga sb_secret_-värden"
+      ],
+      "not_yet": [
+        "evals-runner (verify röd, släppt tillsvidare)",
+        "Automatiserad PR-granskning och säkerhetsgranskning (REVIEW.md 4–5)",
+        "Visuell och tillgänglighetstest (NFR-012)",
+        "Inga granskningar på PR #2"
+      ]
     }
   ],
   "open_decisions": [
