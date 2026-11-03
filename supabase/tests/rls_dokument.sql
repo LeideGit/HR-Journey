@@ -6,11 +6,11 @@
 begin;
 
 insert into auth.users (id, aud, role, email, encrypted_password, created_at, updated_at, instance_id) values
-  ('22222222-2222-2222-2222-222222222222', 'authenticated', 'authenticated', 'admin-test@example.test', '', now(), now(), '00000000-0000-0000-0000-000000000000'),
-  ('33333333-3333-3333-3333-333333333333', 'authenticated', 'authenticated', 'hr-test@example.test',    '', now(), now(), '00000000-0000-0000-0000-000000000000');
+  ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'authenticated', 'authenticated', 'admin-test@example.test', '', now(), now(), '00000000-0000-0000-0000-000000000000'),
+  ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'authenticated', 'authenticated', 'hr-test@example.test',    '', now(), now(), '00000000-0000-0000-0000-000000000000');
 insert into public.user_roles (user_id, role) values
-  ('22222222-2222-2222-2222-222222222222', 'hr_admin'),
-  ('33333333-3333-3333-3333-333333333333', 'hr');
+  ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'hr_admin'),
+  ('bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb', 'hr');
 
 -- Seed-dokumenten från seed.sql finns redan. Ingen ny dokumentdata behövs här.
 
@@ -20,8 +20,8 @@ declare
   ok boolean;
   std constant uuid := '20000000-0000-0000-0000-000000000001';
   skyddad constant uuid := '20000000-0000-0000-0000-000000000002';
-  hr constant uuid := '33333333-3333-3333-3333-333333333333';
-  admin constant uuid := '22222222-2222-2222-2222-222222222222';
+  hr constant uuid := 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb';
+  admin constant uuid := 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
 begin
   -- 1. Anonym ser inga dokument.
   set local role anon;

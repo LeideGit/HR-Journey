@@ -56,7 +56,7 @@ else
   # Återskapa lokal databas från migrationer och seed, kör RLS-testet, och kontrollera utfallet.
   supabase db reset --local >/dev/null 2>&1 || fail "supabase db reset misslyckades"
   container=$(docker ps --format '{{.Names}}' | grep supabase_db_ | head -1)
-  for pair in "rls_dokument.sql:7" "rls_milestones.sql:6"; do
+  for pair in "rls_dokument.sql:7" "rls_milestones.sql:6" "rls_dokument_person.sql:3"; do
     file=${pair%%:*}; expected=${pair##*:}
     out=$(docker exec -i "$container" psql -U postgres -d postgres -v ON_ERROR_STOP=0 -f - < "supabase/tests/$file" 2>&1)
     echo "$out" | grep -E 'NOTICE: +TEST' | sed 's/^.*NOTICE: *//'
