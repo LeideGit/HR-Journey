@@ -55,12 +55,13 @@
 
 ## 9. Verifieringsevidens
 
+- src/dashboard/dataSource.test.ts (mappning, RLS-filtrering i kod, felhantering)
 - src/dashboard/queue.test.ts (filter, sortering, KPI)
-- src/dashboard/Dashboard.test.tsx (UI, filter, tomt läge, fiktiv-märkning)
-- src/milestones/status.test.ts (statusregler)
+- src/dashboard/Dashboard.test.tsx (UI, filter, märkning)
+- Hostat verifierat 2026-11-03: HR ser 1 dokument, HR-admin ser 2, inga fel
 
 ## 10. Öppna blockerare
 
-- OQ-001 (gräns Kommande/Aktuellt): ansvarig användaren. Nästa steg: bekräfta eller ändra förslaget i FEAT-004-B4. Blockerar AC-FEAT-004-4 och TEST-001 för gränsfall.
-- Koppling till hostad data (använder fixtures)
+- Milestones finns inte i hostat projekt. Dashboarden visar 0 milestones tills de läggs in (kräver godkänd skrivning)
+- OQ-001 (gräns Kommande/Aktuellt): ansvarig användaren
 - Granskning av PR-ändringar för dashboard

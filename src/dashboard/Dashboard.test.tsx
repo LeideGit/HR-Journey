@@ -12,7 +12,7 @@ afterEach(() => {
 describe('Dashboard', () => {
   it('visar fiktiv testmiljö-märkning (FEAT-012-AC-4)', () => {
     render(<Dashboard onOpenPerson={() => {}} />);
-    expect(screen.getByRole('status')).toHaveTextContent('Fiktiv testmiljö');
+    expect(screen.getAllByRole('status').some((el) => /Fiktiv testmiljö/.test(el.textContent ?? ''))).toBe(true);
   });
 
   it('visar KPI-kort med antal från statusberäkningen (FR-DASH-002)', () => {

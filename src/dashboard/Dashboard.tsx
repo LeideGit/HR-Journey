@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { byggKo, raknaKort, type ProfileType, type QueueFilter } from './queue';
 import { FIXTURE_TODAY, FIXTURE_WINDOW_DAYS, fixtureItems } from './fixtures';
+import { useQueue } from './useQueue';
 import type { MilestoneStatus } from '../milestones/status';
 import './dashboard.css';
 
@@ -31,25 +32,35 @@ interface DashboardProps {
 export function Dashboard({ onOpenPerson }: DashboardProps) {
   const [profileType, setProfileType] = useState<ProfileType | ''>('');
   const [status, setStatus] = useState<MilestoneStatus | ''>('');
+  const queue = useQueue();
+
+  // Med konfigurerad auth visas databasens data (RLS-filtrerad). Utan konfiguration visas fixturer.
+  const items = queue.status === 'ready' ? queue.items : fixtureItems;
+  const dataSource: 'database' | 'fixture' = queue.status === 'ready' ? 'database' : 'fixture';
 
   const rows = useMemo(() => {
     const filter: QueueFilter = {
       profileType: profileType || undefined,
       status: status || undefined,
     };
-    return byggKo(fixtureItems, FIXTURE_TODAY, FIXTURE_WINDOW_DAYS, filter);
-  }, [profileType, status]);
+    return byggKo(items, FIXTURE_TODAY, FIXTURE_WINDOW_DAYS, filter);
+  }, [items, profileType, status]);
   const counts = useMemo(
-    () => raknaKort(fixtureItems, FIXTURE_TODAY, FIXTURE_WINDOW_DAYS),
-    [],
+    () => raknaKort(items, FIXTURE_TODAY, FIXTURE_WINDOW_DAYS),
+    [items],
   );
 
   const milestones = rows.filter((r) => r.item.kind === 'milestone');
   const documents = rows.filter((r) => r.item.kind === 'dokument');
+  const loading = queue.status === 'loading';
+  const errorMessage = queue.status === 'error' ? queue.message : null;
 
   return (
     <main className="dash">
       <p role="status" className="dash-env">Fiktiv testmiljö. Endast fiktiva personer och dokument.</p>
+      {dataSource === 'fixture' && <p className="dash-env">Visar lokala testdata. Databasen är inte ansluten.</p>}
+      {errorMessage && <p role="alert" className="dash-env">Kunde inte hämta data: {errorMessage}</p>}
+      {loading && <p role="status" className="dash-env">Hämtar arbetskön…</p>}
 
       <header className="dash-head">
         <span className="dash-eyebrow">Arbetskö</span>
