@@ -30,13 +30,17 @@ interface DashboardProps {
 }
 
 export function Dashboard({ onOpenPerson }: DashboardProps) {
+  // Dagens datum i svensk tid. Används för datumvisning i rubriken.
+  const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' })
+    .format(new Date())
+    .split('-')
+    .join('-');
   const [profileType, setProfileType] = useState<ProfileType | ''>('');
   const [status, setStatus] = useState<MilestoneStatus | ''>('');
   const queue = useQueue();
 
   // Med konfigurerad auth visas databasens data (RLS-filtrerad). Utan konfiguration visas fixturer.
   const items = queue.status === 'ready' ? queue.items : fixtureItems;
-  const dataSource: 'database' | 'fixture' = queue.status === 'ready' ? 'database' : 'fixture';
 
   const rows = useMemo(() => {
     const filter: QueueFilter = {
@@ -57,16 +61,15 @@ export function Dashboard({ onOpenPerson }: DashboardProps) {
 
   return (
     <main className="dash">
-      <p role="status" className="dash-env">Fiktiv testmiljö. Endast fiktiva personer och dokument.</p>
-      {dataSource === 'fixture' && <p className="dash-env">Visar lokala testdata. Databasen är inte ansluten.</p>}
-      {errorMessage && <p role="alert" className="dash-env">Kunde inte hämta data: {errorMessage}</p>}
-      {loading && <p role="status" className="dash-env">Hämtar arbetskön…</p>}
+      {errorMessage && <p role="alert" className="dash-alert">Kunde inte hämta data: {errorMessage}</p>}
+      {loading && <p role="status" className="dash-status">Hämtar arbetskön…</p>}
 
       <header className="dash-head">
-        <span className="dash-eyebrow">Arbetskö</span>
-        <h1 className="dash-title">Välkommen</h1>
-        <p className="dash-lede">Det som behöver din uppmärksamhet just nu.</p>
-        <time className="dash-date" dateTime={FIXTURE_TODAY}>{formatDate(FIXTURE_TODAY)}</time>
+        <div className="dash-head-text">
+          <h1 className="dash-title">Välkommen!</h1>
+          <p className="dash-lede">Det som behöver din uppmärksamhet just nu.</p>
+        </div>
+        <time className="dash-date" dateTime={today}>{formatDate(today)}</time>
       </header>
 
       <section className="dash-kpis" aria-label="Översikt">

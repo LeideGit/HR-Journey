@@ -60,7 +60,6 @@ export function PersonPage({ person, onBack }: Props) {
 
   return (
     <main className="person">
-      <p role="status" className="person-env">Fiktiv testmiljö. Endast fiktiva personer och dokument.</p>
       <button type="button" className="person-back" onClick={onBack}>← Tillbaka till arbetskön</button>
 
       <header className="person-head">

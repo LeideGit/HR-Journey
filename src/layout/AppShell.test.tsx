@@ -39,6 +39,13 @@ describe('AppShell', () => {
   });
 });
 
+describe('fiktiv-märkning (FEAT-012-AC-4)', () => {
+  it('märkningen syns i topnav på alla inloggade vyer', () => {
+    render(<AppShell {...base}><p>x</p></AppShell>);
+    expect(screen.getByRole('status')).toHaveTextContent('Fiktiv testmiljö');
+  });
+});
+
 describe('TopNav sökning', () => {
   it('visar inga resultat förrän minst två tecken skrivits', () => {
     render(<AppShell {...base}><p>x</p></AppShell>);

@@ -41,8 +41,8 @@ export function PersonPageView({ personId, onBack }: Props) {
     return () => { active = false; };
   }, [personId]);
 
-  if (state.status === 'loading') return <p className="person-env" role="status">Hämtar personen…</p>;
-  if (state.status === 'missing') return <p role="alert" className="person-env">Personen hittades inte, eller så saknar du behörighet.</p>;
-  if (state.status === 'error') return <p role="alert" className="person-env">Kunde inte hämta personen: {state.message}</p>;
+  if (state.status === 'loading') return <p className="person-status" role="status">Hämtar personen…</p>;
+  if (state.status === 'missing') return <p role="alert" className="person-alert">Personen hittades inte, eller så saknar du behörighet.</p>;
+  if (state.status === 'error') return <p role="alert" className="person-alert">Kunde inte hämta personen: {state.message}</p>;
   return <PersonPage person={state.person} onBack={onBack} />;
 }
