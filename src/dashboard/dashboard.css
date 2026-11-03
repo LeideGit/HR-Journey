@@ -51,10 +51,19 @@ body {
   font-family: var(--font);
 }
 
-.dash-env {
-  font-size: 0.8125rem;
+/* Statusrader (laddning, fel). Ingen banner. */
+.dash-status,
+.dash-alert,
+.person-status,
+.person-alert {
+  font-size: 0.875rem;
   color: var(--ink-muted);
-  margin: 0 0 2rem;
+  margin: 0 0 1.5rem;
+}
+
+.dash-alert,
+.person-alert {
+  color: var(--forsenad);
 }
 
 .dash-eyebrow {
@@ -68,30 +77,6 @@ body {
   background: var(--surface);
   box-shadow: inset 0 0 0 1px var(--hairline);
   color: var(--ink-muted);
-}
-
-.dash-title {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 1rem 0 0.5rem;
-}
-
-.dash-lede {
-  color: var(--ink-muted);
-  margin: 0;
-  font-size: 1.0625rem;
-}
-
-.dash-date {
-  display: block;
-  color: var(--ink-muted);
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-}
-
-.dash-head {
-  margin-bottom: 3rem;
 }
 
 /* KPI-kort: dubbel bezel. Yttre skal, inre kärna. */

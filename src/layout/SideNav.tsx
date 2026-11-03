@@ -53,6 +53,7 @@ export function SideNav({ active, onSelect }: Props) {
 
       <div className="sidenav-foot">
         <span className="sidenav-help">Hjälp &amp; support</span>
+        <span role="status" className="sidenav-env">Fiktiv testmiljö</span>
       </div>
     </nav>
   );

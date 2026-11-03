@@ -10,9 +10,9 @@ afterEach(() => {
 // Fiktiv data från fixtures.ts.
 
 describe('Dashboard', () => {
-  it('visar fiktiv testmiljö-märkning (FEAT-012-AC-4)', () => {
+  it('dashboarden har ingen banner, märkningen ligger i topnav (FEAT-012-AC-4)', () => {
     render(<Dashboard onOpenPerson={() => {}} />);
-    expect(screen.getAllByRole('status').some((el) => /Fiktiv testmiljö/.test(el.textContent ?? ''))).toBe(true);
+    expect(screen.queryByText(/Fiktiv testmiljö/)).not.toBeInTheDocument();
   });
 
   it('visar KPI-kort med antal från statusberäkningen (FR-DASH-002)', () => {

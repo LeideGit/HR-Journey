@@ -17,7 +17,7 @@ export function LoginView({ onSignedIn }: Props) {
   if (!authConfigured || !supabase) {
     return (
       <main className="login">
-        <p role="status" className="login-env">Fiktiv testmiljö. Endast fiktiva personer och dokument.</p>
+        <span role="status" className="topnav-env">Fiktiv testmiljö</span>
         <p role="alert" className="login-error">
           Inloggning är inte konfigurerad. Saknade miljövariabler: VITE_SUPABASE_URL och VITE_SUPABASE_PUBLISHABLE_KEY.
         </p>
@@ -41,7 +41,7 @@ export function LoginView({ onSignedIn }: Props) {
 
   return (
     <main className="login">
-      <p role="status" className="login-env">Fiktiv testmiljö. Endast fiktiva personer och dokument.</p>
+      <span role="status" className="topnav-env">Fiktiv testmiljö</span>
       <h1 className="login-title">Logga in</h1>
       <form className="login-form" onSubmit={onSubmit} noValidate>
         <label className="login-field">
