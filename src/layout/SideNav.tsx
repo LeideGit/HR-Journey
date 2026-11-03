@@ -1,4 +1,4 @@
-// Vänstermeny. FEAT-004, FEAT-002. Wireframe 01: Dashboard, Personer, Profiltyper & mallar,
+// Vänstermeny. FEAT-004, FEAT-002. Wireframe 01: Dashboard, Personer, Mallar,
 // Dokument, Rapporter, Inställningar, längst ned Hjälp & support.
 // Vyer som inte är byggda än är synliga men markerade, i stället för att vara döda länkar.
 
@@ -14,7 +14,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', available: true },
   { id: 'personer', label: 'Personer', available: true },
-  { id: 'profiltyper', label: 'Profiltyper & mallar', available: false },
+  { id: 'profiltyper', label: 'Mallar', available: false },
   { id: 'dokument', label: 'Dokument', available: false },
   { id: 'rapporter', label: 'Rapporter', available: false },
   { id: 'installningar', label: 'Inställningar', available: false },

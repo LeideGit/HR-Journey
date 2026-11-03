@@ -10,7 +10,7 @@ describe('SideNav', () => {
   it('visar alla sex menypunkter från wireframe 01 i rätt ordning', () => {
     render(<SideNav active="dashboard" onSelect={() => {}} />);
     const labels = screen.getAllByRole('button').map((b) => b.textContent?.replace('Snart', '').trim());
-    expect(labels).toEqual(['Dashboard', 'Personer', 'Profiltyper & mallar', 'Dokument', 'Rapporter', 'Inställningar']);
+    expect(labels).toEqual(['Dashboard', 'Personer', 'Mallar', 'Dokument', 'Rapporter', 'Inställningar']);
   });
 
   it('markerar aktiv vy med aria-current', () => {
