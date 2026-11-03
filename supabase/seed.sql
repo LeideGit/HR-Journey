@@ -64,3 +64,14 @@ insert into public.user_roles (user_id, role) values
   ('11111111-1111-1111-1111-111111111111', 'hr_admin'),
   ('22222222-2222-2222-2222-222222222222', 'hr')
 on conflict (user_id) do nothing;
+
+-- Korta beskrivningar för varje milestone (visas i infomodulen). Fiktiva uppgifter.
+update public.person_milestones set description = case id
+  when '50000000-0000-0000-0000-000000000001' then 'Följ upp hur personen känner sig i rollen och om något behöver justeras i arbetet.'
+  when '50000000-0000-0000-0000-000000000002' then 'Introduktionen i organisationen: rutiner, verktyg och första veckorna.'
+  when '50000000-0000-0000-0000-000000000003' then 'Planera och genomför kompetenssamtalet och sätt mål för kommande period.'
+  when '50000000-0000-0000-0000-000000000004' then 'Utvärdera konsultuppdraget med uppdragsgivaren och dokumentera resultatet.'
+  when '50000000-0000-0000-0000-000000000005' then 'Onboarding av nyanställd: konton, utrustning och genomgång av policyer.'
+  when '50000000-0000-0000-0000-000000000006' then 'Förbered introduktionen för LIA-eleven: dagsschema, mentor och kontaktpersoner.'
+end
+where id in ('50000000-0000-0000-0000-000000000001','50000000-0000-0000-0000-000000000002','50000000-0000-0000-0000-000000000003','50000000-0000-0000-0000-000000000004','50000000-0000-0000-0000-000000000005','50000000-0000-0000-0000-000000000006');
