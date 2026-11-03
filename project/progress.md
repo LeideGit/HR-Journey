@@ -28,6 +28,8 @@ REVIEW.md kräver en mänsklig granskare som inte är författaren för normal r
 
 Mergarna gjordes av `LeideGit`, som är författaren. Ingen av dem har en andra granskare. Detta är inte åtgärdat. Det kan eftergranskas, eller accepteras uttryckligen.
 
+**Accepterad av användaren 2026-11-03:** avvikelsen för PR #1–#15 är uttryckligen accepterad. Ingen efterhandsgranskning planeras.
+
 ## Features
 
 | FEAT | Status | Vad som finns | Vad som saknas |

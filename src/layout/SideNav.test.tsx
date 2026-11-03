@@ -36,7 +36,7 @@ describe('SideNav', () => {
     expect(onSelect).not.toHaveBeenCalled();
   });
 
-  it('bara Dashboard och Personer är byggda', () => {
-    expect(NAV_ITEMS.filter((i) => i.available).map((i) => i.id)).toEqual(['dashboard', 'personer']);
+  it('Dashboard, Personer och Dokument är byggda', () => {
+    expect(NAV_ITEMS.filter((i) => i.available).map((i) => i.id)).toEqual(['dashboard', 'personer', 'dokument']);
   });
 });
