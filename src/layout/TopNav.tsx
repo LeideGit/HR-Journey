@@ -15,7 +15,6 @@ interface Props {
 
 export function TopNav({ people, email, role, onOpenPerson, onSignOut }: Props) {
   const [query, setQuery] = useState('');
-  const [menuOpen, setMenuOpen] = useState(false);
   const results = useMemo(() => searchPersons(people, query), [people, query]);
   const showResults = query.trim().length >= 2;
 
@@ -56,12 +55,12 @@ export function TopNav({ people, email, role, onOpenPerson, onSignOut }: Props) 
       </div>
 
       <div className="topnav-user">
+        <button type="button" className="topnav-signout" onClick={onSignOut} aria-label="Logga ut">
+          Logga ut
+        </button>
         <button
           type="button"
           className="topnav-user-btn"
-          aria-haspopup="menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
         >
           <span className="topnav-avatar" aria-hidden="true">{initialsOf(email)}</span>
           <span className="topnav-user-text">
@@ -69,13 +68,7 @@ export function TopNav({ people, email, role, onOpenPerson, onSignOut }: Props) 
             <span className="topnav-user-role">{role ? ROLE_LABEL[role] : 'Roll saknas'}</span>
           </span>
         </button>
-        {menuOpen && (
-          <div className="topnav-menu" role="menu">
-            <button type="button" role="menuitem" className="topnav-menu-item" onClick={onSignOut}>
-              Logga ut
-            </button>
-          </div>
-        )}
+
       </div>
     </header>
   );
