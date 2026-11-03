@@ -1,0 +1,162 @@
+/* Vänstermeny och layout. Wireframe 01. Tokens från dashboard.css. */
+
+.shell {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+.shell-content {
+  min-width: 0;
+}
+
+.sidenav {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  background: var(--surface);
+  box-shadow: inset -1px 0 0 var(--hairline);
+  font-family: var(--font);
+}
+
+.sidenav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.5rem;
+}
+
+.sidenav-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  display: grid;
+  place-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--kommande-bg);
+  color: var(--kommande);
+}
+
+.sidenav-title {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.sidenav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.sidenav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 0.875rem;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 500ms cubic-bezier(0.32, 0.72, 0, 1), transform 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.sidenav-item:hover:not([aria-disabled='true']) {
+  background: rgba(20, 22, 26, 0.04);
+}
+
+.sidenav-item:active:not([aria-disabled='true']) {
+  transform: scale(0.98);
+}
+
+.sidenav-item.is-active {
+  background: var(--kommande-bg);
+  color: var(--kommande);
+  font-weight: 600;
+}
+
+.sidenav-item.is-soon {
+  color: var(--ink-muted);
+  cursor: default;
+}
+
+.sidenav-item:focus-visible {
+  outline: 2px solid var(--kommande);
+  outline-offset: 2px;
+}
+
+.sidenav-soon {
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  background: rgba(20, 22, 26, 0.05);
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+}
+
+.sidenav-foot {
+  margin-top: auto;
+  padding: 0 0.875rem;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+@media (max-width: 767px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidenav {
+    position: sticky;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    overflow-x: auto;
+    box-shadow: inset 0 -1px 0 var(--hairline);
+  }
+
+  .sidenav-brand,
+  .sidenav-foot {
+    display: none;
+  }
+
+  .sidenav-list {
+    display: flex;
+    gap: 0.25rem;
+    flex: 1 0 auto;
+  }
+
+  .sidenav-item {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  .sidenav-soon {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidenav-item {
+    transition-duration: 0.01ms !important;
+  }
+}

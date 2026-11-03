@@ -3,12 +3,15 @@ import { Dashboard } from './dashboard/Dashboard';
 import { PersonPageView } from './person/PersonPageView';
 import { LoginView } from './auth/LoginView';
 import { supabase, authConfigured } from './auth/supabase';
+import { AppShell } from './layout/AppShell';
+import type { NavView } from './layout/SideNav';
 
 // Startsida: inloggning, sedan arbetskön. Personsidan öppnas från dashboarden.
 // Fiktiv testmiljö (FEAT-012-B4). Vyn växlas med state, eftersom projektet saknar router.
 export function App() {
   const [signedIn, setSignedIn] = useState<boolean | null>(authConfigured ? null : false);
   const [personId, setPersonId] = useState<string | null>(null);
+  const [view, setView] = useState<NavView>('dashboard');
 
   useEffect(() => {
     if (!supabase) return;
@@ -28,8 +31,22 @@ export function App() {
   if (signedIn === null) return null;
   if (!signedIn) return <LoginView onSignedIn={() => setSignedIn(true)} />;
 
+  // Personer öppnas från dashboarden. Menyn byter vy och nollställer vald person.
+  const select = (next: NavView) => {
+    setPersonId(null);
+    setView(next);
+  };
+
   if (personId) {
-    return <PersonPageView personId={personId} onBack={() => setPersonId(null)} />;
+    return (
+      <AppShell active={view} onSelect={select}>
+        <PersonPageView personId={personId} onBack={() => setPersonId(null)} />
+      </AppShell>
+    );
   }
-  return <Dashboard onOpenPerson={setPersonId} />;
+  return (
+    <AppShell active={view} onSelect={select}>
+      <Dashboard onOpenPerson={(id) => { setView('dashboard'); setPersonId(id); }} />
+    </AppShell>
+  );
 }
