@@ -75,3 +75,32 @@ update public.person_milestones set description = case id
   when '50000000-0000-0000-0000-000000000006' then 'Förbered introduktionen för LIA-eleven: dagsschema, mentor och kontaktpersoner.'
 end
 where id in ('50000000-0000-0000-0000-000000000001','50000000-0000-0000-0000-000000000002','50000000-0000-0000-0000-000000000003','50000000-0000-0000-0000-000000000004','50000000-0000-0000-0000-000000000005','50000000-0000-0000-0000-000000000006');
+
+-- Fyra fiktiva dokument med personkoppling (FEAT-006-B3). Alla data är påhittade.
+-- Ett skyddat dokument (särskilt skydd) är bara synligt för HR-administratör.
+insert into public.documents (id, name, document_type, security_class, retention_status, is_archived) values
+  ('20000000-0000-0000-0000-000000000003', 'Fiktivt anställningsavtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000004', 'Fiktivt konsultuppdragsavtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000005', 'Fiktivt LIA-avtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000006', 'Fiktiv hälsouppgift', 'halsa', 'skyddad', 'ej_aktuell', false)
+on conflict (id) do nothing;
+
+insert into public.document_versions (id, document_id, version_no, storage_path, mime_type, valid_from, valid_to, mock_text_content) values
+  ('30000000-0000-0000-0000-000000000004', '20000000-0000-0000-0000-000000000003', 1, '20000000-0000-0000-0000-000000000003/30000000-0000-0000-0000-000000000004.pdf', 'application/pdf', '2026-02-01', '2027-12-31', 'Fiktivt anställningsavtal. Påhittade villkor.'),
+  ('30000000-0000-0000-0000-000000000005', '20000000-0000-0000-0000-000000000004', 1, '20000000-0000-0000-0000-000000000004/30000000-0000-0000-0000-000000000005.pdf', 'application/pdf', '2026-03-15', '2026-11-20', 'Fiktivt konsultuppdragsavtal. Påhittade villkor.'),
+  ('30000000-0000-0000-0000-000000000006', '20000000-0000-0000-0000-000000000005', 1, '20000000-0000-0000-0000-000000000005/30000000-0000-0000-0000-000000000006.pdf', 'application/pdf', '2026-09-01', '2027-06-30', 'Fiktivt LIA-avtal. Påhittade villkor.'),
+  ('30000000-0000-0000-0000-000000000007', '20000000-0000-0000-0000-000000000006', 1, '20000000-0000-0000-0000-000000000006/30000000-0000-0000-0000-000000000007.pdf', 'application/pdf', '2026-01-01', null, 'Fiktiv hälsouppgift. Påhittat innehåll, endast HR-administratör.')
+on conflict (id) do nothing;
+
+update public.documents set current_version_id = '30000000-0000-0000-0000-000000000004' where id = '20000000-0000-0000-0000-000000000003';
+update public.documents set current_version_id = '30000000-0000-0000-0000-000000000005' where id = '20000000-0000-0000-0000-000000000004';
+update public.documents set current_version_id = '30000000-0000-0000-0000-000000000006' where id = '20000000-0000-0000-0000-000000000005';
+update public.documents set current_version_id = '30000000-0000-0000-0000-000000000007' where id = '20000000-0000-0000-0000-000000000006';
+
+insert into public.document_person_links (document_id, person_id) values
+  ('20000000-0000-0000-0000-000000000003', '10000000-0000-0000-0000-000000000001'),
+  ('20000000-0000-0000-0000-000000000004', '10000000-0000-0000-0000-000000000002'),
+  ('20000000-0000-0000-0000-000000000005', '10000000-0000-0000-0000-000000000003'),
+  ('20000000-0000-0000-0000-000000000006', '10000000-0000-0000-0000-000000000001'),
+  ('20000000-0000-0000-0000-000000000002', '10000000-0000-0000-0000-000000000001')
+on conflict do nothing;

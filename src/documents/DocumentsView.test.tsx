@@ -8,9 +8,9 @@ import type { DocumentRecord } from './documentData';
 afterEach(() => cleanup());
 
 const docs: DocumentRecord[] = [
-  { id: 'd1', name: 'Fiktiv introduktionsplan', type: 'plan', securityClass: 'standard', versionNo: 2, mimeType: 'application/pdf', validFrom: '2026-03-01', validTo: '2027-03-01', isArchived: false, status: 'giltig' },
-  { id: 'd2', name: 'Fiktiv policy 2024', type: 'policy', securityClass: 'standard', versionNo: 1, mimeType: 'application/pdf', validFrom: '2024-01-01', validTo: '2026-11-10', isArchived: false, status: 'gar_snart_ut' },
-  { id: 'd3', name: 'Fiktivt lönebesked', type: 'lon', securityClass: 'skyddad', versionNo: 1, mimeType: 'application/pdf', validFrom: '2026-01-01', validTo: '2026-12-31', isArchived: false, status: 'giltig' },
+  { id: 'd1', name: 'Fiktiv introduktionsplan', type: 'plan', links: [], securityClass: 'standard', versionNo: 2, mimeType: 'application/pdf', validFrom: '2026-03-01', validTo: '2027-03-01', isArchived: false, status: 'giltig' },
+  { id: 'd2', name: 'Fiktivt konsultuppdragsavtal', type: 'avtal', links: [{ personId: 'p2', personName: 'Fiktiv Bo Testsson' }], securityClass: 'standard', versionNo: 1, mimeType: 'application/pdf', validFrom: '2024-01-01', validTo: '2026-11-10', isArchived: false, status: 'gar_snart_ut' },
+  { id: 'd3', name: 'Fiktivt lönebesked', type: 'lon', links: [{ personId: 'p1', personName: 'Fiktiv Anna Exempel' }], securityClass: 'skyddad', versionNo: 1, mimeType: 'application/pdf', validFrom: '2026-01-01', validTo: '2026-12-31', isArchived: false, status: 'giltig' },
 ];
 
 describe('DocumentsView', () => {
@@ -38,16 +38,16 @@ describe('DocumentsView', () => {
 
   it('sökning på namn filtrerar listan', () => {
     render(<DocumentsView docs={docs} />);
-    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'policy' } });
+    fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'konsult' } });
     expect(screen.queryByText('Fiktiv introduktionsplan')).not.toBeInTheDocument();
-    expect(screen.getByText('Fiktiv policy 2024')).toBeInTheDocument();
+    expect(screen.getByText('Fiktivt konsultuppdragsavtal')).toBeInTheDocument();
   });
 
   it('statusfilter filtrerar listan', () => {
     render(<DocumentsView docs={docs} />);
     fireEvent.change(screen.getByLabelText('Status'), { target: { value: 'gar_snart_ut' } });
     expect(screen.queryByText('Fiktiv introduktionsplan')).not.toBeInTheDocument();
-    expect(screen.getByText('Fiktiv policy 2024')).toBeInTheDocument();
+    expect(screen.getByText('Fiktivt konsultuppdragsavtal')).toBeInTheDocument();
   });
 
   it('ingen träff ger tydligt besked', () => {
@@ -67,6 +67,14 @@ describe('DocumentsView', () => {
   it('utan vald rad visas en neutral uppmaning i detaljpanelen', () => {
     render(<DocumentsView docs={docs} />);
     expect(screen.getByText('Välj ett dokument för att se detaljer.')).toBeInTheDocument();
+  });
+
+  it('personen visas som tagg i kolumnen Kopplat till, inte i dokumentets namn (wireframe 03)', () => {
+    render(<DocumentsView docs={docs} />);
+    // Två rader har taggar, så sökningen görs i tabellen.
+    const table = screen.getByRole('table');
+    expect(within(table).getByText('Fiktiv Bo Testsson')).toBeInTheDocument();
+    expect(screen.getByText('Fiktivt konsultuppdragsavtal')).toBeInTheDocument();
   });
 
   it('dokument utan giltighet visas som Tills vidare', () => {

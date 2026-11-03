@@ -56,6 +56,10 @@ export function Dashboard({ onOpenPerson }: DashboardProps) {
 
   return (
     <main className="dash">
+      <header className="dash-head">
+        <h1 className="dash-title">Välkommen!</h1>
+        <p className="dash-lede">Det som behöver din uppmärksamhet just nu.</p>
+      </header>
       {errorMessage && <p role="alert" className="dash-alert">Kunde inte hämta data: {errorMessage}</p>}
       {loading && <p role="status" className="dash-status">Hämtar arbetskön…</p>}
 

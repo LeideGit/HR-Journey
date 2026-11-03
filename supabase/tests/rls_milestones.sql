@@ -20,7 +20,7 @@ declare
 begin
   -- Seed-person används. Milestone skapas som superuser (kringgår RLS för fixture).
   insert into public.person_milestones (id, person_id, title, due_date)
-    values ('50000000-0000-0000-0000-000000000001', person, 'Fiktiv introduktion', '2026-11-15')
+    values ('cccccccc-cccc-cccc-cccc-cccccccccccc', person, 'Fiktiv introduktion', '2026-11-15')
     returning id into ms;
   insert into public.milestone_tasks (milestone_id, title) values (ms, 'Fiktiv uppgift 1');
 

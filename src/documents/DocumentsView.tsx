@@ -94,10 +94,12 @@ export function DocumentsView({ docs }: Props) {
                   <thead>
                     <tr>
                       <th scope="col">Namn</th>
-                      <th scope="col">Typ</th>
+                      <th scope="col">Dokumenttyp</th>
+                      <th scope="col">Kopplat till</th>
+                      <th scope="col">Gäller från</th>
                       <th scope="col">Gäller till</th>
                       <th scope="col">Status</th>
-                      <th scope="col">Säkerhet</th>
+                      <th scope="col">Säkerhetsklass</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -113,6 +115,18 @@ export function DocumentsView({ docs }: Props) {
                           </button>
                         </td>
                         <td>{d.type}</td>
+                        <td>
+                          {d.links.length === 0 ? (
+                            <span className="docs-muted">–</span>
+                          ) : (
+                            <ul className="docs-tags" aria-label="Kopplat till">
+                              {d.links.map((l) => (
+                                <li key={l.personId} className="docs-tag">{l.personName}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </td>
+                        <td>{fmt(d.validFrom)}</td>
                         <td>{fmt(d.validTo)}</td>
                         <td><span className={`badge docs-status docs-status-${d.status}`}>{STATUS_LABEL[d.status]}</span></td>
                         <td>{SECURITY_LABEL[d.securityClass]}</td>
