@@ -79,7 +79,7 @@ export async function fetchPerson(
 ): Promise<{ person: PersonDetail | null; error: string | null }> {
   const [p, m, t] = await Promise.all([
     client.from('persons').select('id,name,email,profile_type,department,manager_name,start_date,end_date,is_active').eq('id', personId).maybeSingle() as Query,
-    client.from('person_milestones').select('id,person_id,title,due_date').eq('person_id', personId) as Query,
+    client.from('person_milestones').select('id,person_id,title,description,due_date').eq('person_id', personId) as Query,
     client.from('milestone_tasks').select('milestone_id,is_done') as Query,
   ]);
   const error = p.error?.message ?? m.error?.message ?? t.error?.message ?? null;

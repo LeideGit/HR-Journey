@@ -76,3 +76,26 @@ describe('fetchPerson', () => {
     expect(res.person).toBeNull();
   });
 });
+
+describe('beskrivning på milestones (regression)', () => {
+  it('fetchPerson frågar efter description, så att infomodulen kan visa den', async () => {
+    const selected: string[] = [];
+    const client: PersonClient = {
+      from: (table) => ({
+        select: (cols: string) => {
+          if (table === 'person_milestones') selected.push(cols);
+          return Object.assign(reply({ data: table === 'persons' ? anna : ms, error: null }), {
+            eq: () => reply({ data: table === 'persons' ? anna : ms, error: null }),
+          });
+        },
+      }),
+    };
+    await fetchPerson(client, anna.id);
+    expect(selected.some((c) => c.includes('description'))).toBe(true);
+  });
+
+  it('en milestone med beskrivning får den med i personsidans data', () => {
+    const d = mapPersonDetail(anna, [{ ...ms[0], description: 'Kort text.' }], []);
+    expect(d?.milestones[0].description).toBe('Kort text.');
+  });
+});
