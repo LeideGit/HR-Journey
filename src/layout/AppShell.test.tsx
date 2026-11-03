@@ -79,11 +79,15 @@ describe('TopNav användarmeny', () => {
     expect(screen.getByText('HR-administratör')).toBeInTheDocument();
   });
 
-  it('logga ut anropar onSignOut', () => {
+  it('logga ut-knappen syns direkt, utan att öppna någon meny', () => {
+    render(<AppShell {...base}><p>x</p></AppShell>);
+    expect(screen.getByRole('button', { name: 'Logga ut' })).toBeInTheDocument();
+  });
+
+  it('logga ut-knappen anropar onSignOut', () => {
     const onSignOut = vi.fn();
     render(<AppShell {...base} onSignOut={onSignOut}><p>x</p></AppShell>);
-    fireEvent.click(screen.getByRole('button', { name: /hr@example.test/ }));
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Logga ut' }));
-    expect(onSignOut).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: 'Logga ut' }));
+    expect(onSignOut).toHaveBeenCalledTimes(1);
   });
 });
