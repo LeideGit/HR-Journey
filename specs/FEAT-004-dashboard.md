@@ -55,13 +55,12 @@
 
 ## 9. Verifieringsevidens
 
-- src/dashboard/dataSource.test.ts (mappning, RLS-filtrering i kod, felhantering)
+- src/dashboard/dataSource.test.ts (mappning, task-regression, felhantering)
 - src/dashboard/queue.test.ts (filter, sortering, KPI)
 - src/dashboard/Dashboard.test.tsx (UI, filter, märkning)
-- Hostat verifierat 2026-11-03: HR ser 1 dokument, HR-admin ser 2, inga fel
+- Hostat 2026-11-03 med kod som appen kör: HR 2 försenade, 1 aktuell, 1 kommande, 1 dokument. HR-admin samma plus 1 skyddat dokument. Inga fel.
 
 ## 10. Öppna blockerare
 
-- Milestones finns inte i hostat projekt. Dashboarden visar 0 milestones tills de läggs in (kräver godkänd skrivning)
 - OQ-001 (gräns Kommande/Aktuellt): ansvarig användaren
-- Granskning av PR-ändringar för dashboard
+- Granskning av PR-ändringar för dashboard. PR #10 mergad utan granskning.

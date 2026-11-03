@@ -16,7 +16,6 @@ export interface MilestoneRow {
   person_id: string;
   title: string;
   due_date: string;
-  tasks: { isDone: boolean }[] | null;
 }
 
 export interface DocumentRow {
@@ -33,11 +32,25 @@ export interface DocumentRow {
  * En milestone som refererar till en person som RLS inte släppt igenom hoppas över,
  * så att kön aldrig visar en post utan personkontext.
  */
+export interface TaskRow {
+  milestone_id: string;
+  is_done: boolean;
+}
+
 export function mapToQueueItems(
   persons: PersonRow[],
   milestones: MilestoneRow[],
   documents: DocumentRow[],
+  tasks: TaskRow[] = [],
 ): QueueItem[] {
+  // Tasks grupperas per milestone. Utan detta blir alla milestones utan uppgifter,
+  // och statusen blir felaktigt försenad även när allt är klart.
+  const tasksByMilestone = new Map<string, { isDone: boolean }[]>();
+  for (const t of tasks) {
+    const list = tasksByMilestone.get(t.milestone_id) ?? [];
+    list.push({ isDone: t.is_done });
+    tasksByMilestone.set(t.milestone_id, list);
+  }
   const byId = new Map(persons.map((p) => [p.id, p]));
   const items: QueueItem[] = [];
 
@@ -53,7 +66,7 @@ export function mapToQueueItems(
       department: p.department,
       title: m.title,
       dueDate: m.due_date,
-      tasks: m.tasks ?? [],
+      tasks: tasksByMilestone.get(m.id) ?? [],
     });
   }
 
@@ -85,12 +98,13 @@ export function fixturePersonsToRows(people: FixturePersonDetail[]): PersonRow[]
 export async function fetchQueue(
   client: { from: (t: string) => { select: (c: string) => Promise<{ data: unknown[] | null; error: { message: string } | null }> } },
 ): Promise<{ items: QueueItem[]; error: string | null }> {
-  const [p, m, d] = await Promise.all([
+  const [p, m, t, d] = await Promise.all([
     client.from('persons').select('id,name,profile_type,department'),
     client.from('person_milestones').select('id,person_id,title,due_date'),
+    client.from('milestone_tasks').select('milestone_id,is_done'),
     client.from('documents').select('id,name,document_type,security_class,current_version:document_versions!documents_current_version_fk(valid_to)'),
   ]);
-  const error = p.error?.message ?? m.error?.message ?? d.error?.message ?? null;
+  const error = p.error?.message ?? m.error?.message ?? t.error?.message ?? d.error?.message ?? null;
   if (error) return { items: [], error };
   // Platta ut giltigheten från den aktuella versionen till dokumentraden.
   const docs: DocumentRow[] = ((d.data ?? []) as Array<{ id: string; name: string; document_type: string; security_class: string; current_version: { valid_to: string | null } | null }>).map((x) => ({
@@ -101,7 +115,7 @@ export async function fetchQueue(
     valid_to: x.current_version?.valid_to ?? null,
   }));
   return {
-    items: mapToQueueItems((p.data ?? []) as PersonRow[], (m.data ?? []) as MilestoneRow[], docs),
+    items: mapToQueueItems((p.data ?? []) as PersonRow[], (m.data ?? []) as MilestoneRow[], docs, (t.data ?? []) as TaskRow[]),
     error: null,
   };
 }
