@@ -19,10 +19,18 @@ export interface DocumentDbRow {
 
 export type DocumentStatus = 'giltig' | 'gar_snart_ut' | 'utgangen' | 'gallring_kravs' | 'arkiverad';
 
+/** En koppling som visas som tagg i tabellen. Personer är den vanligaste. */
+export interface DocumentLink {
+  personId: string;
+  personName: string;
+}
+
 export interface DocumentRecord {
   id: string;
   name: string;
   type: string;
+  /** Personer dokumentet är kopplat till. Visas som taggar i kolumnen Kopplat till. */
+  links: DocumentLink[];
   securityClass: 'standard' | 'skyddad';
   versionNo: number | null;
   mimeType: string | null;
@@ -52,13 +60,16 @@ export function documentStatus(
   return 'giltig';
 }
 
-export function mapDocuments(rows: DocumentDbRow[], today: string): DocumentRecord[] {
+export function mapDocuments(rows: DocumentDbRow[], today: string, links: DocumentLinkRow[] = []): DocumentRecord[] {
   return rows.map((r) => {
     const validTo = r.current_version?.valid_to ?? null;
     return {
       id: r.id,
       name: r.name,
       type: r.document_type,
+      links: links
+        .filter((l) => l.document_id === r.id && l.person)
+        .map((l) => ({ personId: l.person_id, personName: l.person!.name })),
       securityClass: r.security_class,
       versionNo: r.current_version?.version_no ?? null,
       mimeType: r.current_version?.mime_type ?? null,
@@ -84,12 +95,22 @@ export interface DocumentClient {
 }
 
 /** Hämtar dokument med aktuell version. RLS släpper bara igenom det användaren får läsa. */
+export interface DocumentLinkRow {
+  document_id: string;
+  person_id: string;
+  person: { name: string } | null;
+}
+
 export async function fetchDocuments(client: DocumentClient, today: string): Promise<{ docs: DocumentRecord[]; error: string | null }> {
-  const res = await client.from('documents').select(
-    'id,name,document_type,security_class,retention_status,is_archived,current_version:document_versions!documents_current_version_fk(version_no,valid_from,valid_to,mime_type)',
-  );
-  if (res.error) return { docs: [], error: res.error.message };
-  return { docs: mapDocuments((res.data ?? []) as DocumentDbRow[], today), error: null };
+  const [d, l] = await Promise.all([
+    client.from('documents').select(
+      'id,name,document_type,security_class,retention_status,is_archived,current_version:document_versions!documents_current_version_fk(version_no,valid_from,valid_to,mime_type)',
+    ),
+    client.from('document_person_links').select('document_id,person_id,person:persons(name)'),
+  ]);
+  const error = d.error?.message ?? l.error?.message ?? null;
+  if (error) return { docs: [], error };
+  return { docs: mapDocuments((d.data ?? []) as DocumentDbRow[], today, (l.data ?? []) as DocumentLinkRow[]), error: null };
 }
 
 function dayDiff(from: string, to: string): number {

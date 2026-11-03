@@ -79,10 +79,10 @@ where id in ('50000000-0000-0000-0000-000000000001','50000000-0000-0000-0000-000
 -- Fyra fiktiva dokument med personkoppling (FEAT-006-B3). Alla data är påhittade.
 -- Ett skyddat dokument (särskilt skydd) är bara synligt för HR-administratör.
 insert into public.documents (id, name, document_type, security_class, retention_status, is_archived) values
-  ('20000000-0000-0000-0000-000000000003', 'Fiktivt anställningsavtal, Anna', 'avtal', 'standard', 'ej_aktuell', false),
-  ('20000000-0000-0000-0000-000000000004', 'Fiktivt konsultuppdragsavtal, Bo', 'avtal', 'standard', 'ej_aktuell', false),
-  ('20000000-0000-0000-0000-000000000005', 'Fiktivt LIA-avtal, Cia', 'avtal', 'standard', 'ej_aktuell', false),
-  ('20000000-0000-0000-0000-000000000006', 'Fiktiv hälsouppgift, Anna (skyddad)', 'halsa', 'skyddad', 'ej_aktuell', false)
+  ('20000000-0000-0000-0000-000000000003', 'Fiktivt anställningsavtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000004', 'Fiktivt konsultuppdragsavtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000005', 'Fiktivt LIA-avtal', 'avtal', 'standard', 'ej_aktuell', false),
+  ('20000000-0000-0000-0000-000000000006', 'Fiktiv hälsouppgift', 'halsa', 'skyddad', 'ej_aktuell', false)
 on conflict (id) do nothing;
 
 insert into public.document_versions (id, document_id, version_no, storage_path, mime_type, valid_from, valid_to, mock_text_content) values
