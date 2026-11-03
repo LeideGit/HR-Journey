@@ -91,3 +91,19 @@ export async function fetchPerson(
     error: null,
   };
 }
+
+/**
+ * Hämtar alla personer för sökning i topnav. RLS avgör vilka som kommer tillbaka,
+ * så sökningen kan aldrig visa en person användaren inte får läsa.
+ */
+export async function fetchPeople(
+  client: PersonClient,
+): Promise<{ people: { id: string; name: string; email: string; department: string; manager: string | null }[]; error: string | null }> {
+  const res = await (client.from('persons').select('id,name,email,department,manager_name') as unknown as Promise<{ data: unknown; error: { message: string } | null }>);
+  if (res.error) return { people: [], error: res.error.message };
+  const rows = (res.data ?? []) as Array<{ id: string; name: string; email: string; department: string; manager_name: string | null }>;
+  return {
+    people: rows.map((r) => ({ id: r.id, name: r.name, email: r.email, department: r.department, manager: r.manager_name })),
+    error: null,
+  };
+}
