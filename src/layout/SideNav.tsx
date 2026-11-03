@@ -15,7 +15,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', available: true },
   { id: 'personer', label: 'Personer', available: true },
   { id: 'profiltyper', label: 'Mallar', available: false },
-  { id: 'dokument', label: 'Dokument', available: false },
+  { id: 'dokument', label: 'Dokument', available: true },
   { id: 'rapporter', label: 'Rapporter', available: false },
   { id: 'installningar', label: 'Inställningar', available: false },
 ];

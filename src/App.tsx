@@ -8,6 +8,8 @@ import type { NavView } from './layout/SideNav';
 import type { SearchablePerson } from './layout/search';
 import { fetchPeople } from './person/personData';
 import { fetchRole, type AppRole } from './auth/currentUser';
+import { DocumentsView } from './documents/DocumentsView';
+import { fetchDocuments, type DocumentRecord } from './documents/documentData';
 
 // Startsida: inloggning, sedan arbetskön. Personsidan öppnas från dashboarden.
 // Fiktiv testmiljö (FEAT-012-B4). Vyn växlas med state, eftersom projektet saknar router.
@@ -18,6 +20,8 @@ export function App() {
   const [email, setEmail] = useState('');
   const [role, setRole] = useState<AppRole | null>(null);
   const [people, setPeople] = useState<SearchablePerson[]>([]);
+  const [docs, setDocs] = useState<DocumentRecord[]>([]);
+  const [docsError, setDocsError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!supabase) return;
@@ -35,6 +39,11 @@ export function App() {
     });
     fetchPeople(client).then(({ people: rows }) => {
       if (active) setPeople(rows);
+    });
+    fetchDocuments(client as unknown as Parameters<typeof fetchDocuments>[0], new Date().toISOString().slice(0, 10)).then(({ docs: rows, error }) => {
+      if (!active) return;
+      setDocs(rows);
+      setDocsError(error);
     });
     const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
       setSignedIn(session !== null);
@@ -76,6 +85,11 @@ export function App() {
 
   if (personId) {
     return shell(<PersonPageView personId={personId} onBack={() => setPersonId(null)} />);
+  }
+  if (view === 'dokument') {
+    return shell(docsError
+      ? <p role="alert" className="docs-empty">Kunde inte hämta dokument: {docsError}</p>
+      : <DocumentsView docs={docs} />);
   }
   return shell(<Dashboard onOpenPerson={openPerson} />);
 }
