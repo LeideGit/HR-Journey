@@ -13,9 +13,6 @@
 }
 
 .docs-title {
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
   margin: 0;
 }
 
@@ -134,9 +131,6 @@
 
 .docs-detail-title {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
 }
 
 .docs-detail-meta {

@@ -344,3 +344,14 @@ body {
     overflow-x: auto;
   }
 }
+
+/* Sidrubrik och underrubrik. Tät yta ovanför och under (wireframe 01). */
+.dash-head {
+  margin: 0 0 1.25rem;
+}
+
+.dash-lede {
+  margin: 0.25rem 0 0;
+  font-size: 14px;
+  color: var(--ink-muted);
+}
