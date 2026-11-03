@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Dashboard } from './dashboard/Dashboard';
-import { PersonPage } from './person/PersonPage';
-import { fixturePersons } from './dashboard/fixtures';
+import { PersonPageView } from './person/PersonPageView';
 import { LoginView } from './auth/LoginView';
 import { supabase, authConfigured } from './auth/supabase';
 
@@ -29,9 +28,8 @@ export function App() {
   if (signedIn === null) return null;
   if (!signedIn) return <LoginView onSignedIn={() => setSignedIn(true)} />;
 
-  const person = personId ? fixturePersons.find((p) => p.id === personId) : undefined;
-  if (person) {
-    return <PersonPage person={person} onBack={() => setPersonId(null)} />;
+  if (personId) {
+    return <PersonPageView personId={personId} onBack={() => setPersonId(null)} />;
   }
   return <Dashboard onOpenPerson={setPersonId} />;
 }
