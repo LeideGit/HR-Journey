@@ -20,7 +20,6 @@ export function TopNav({ people, email, role, onOpenPerson, onSignOut }: Props) 
 
   return (
     <header className="topnav">
-      <span role="status" className="topnav-env">Fiktiv testmiljö</span>
       <div className="topnav-search">
         <label className="topnav-search-field">
           <span className="sr-only">Sök person</span>
