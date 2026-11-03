@@ -2,9 +2,9 @@
 
 .docs {
   min-height: 100dvh;
-  padding: 2.5rem 2rem 4rem;
+  padding: 2rem 2rem 4rem;
   box-sizing: border-box;
-  max-width: 1400px;
+  max-width: none;
   font-family: var(--font);
 }
 

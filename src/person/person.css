@@ -2,9 +2,9 @@
 
 .person {
   min-height: 100dvh;
-  padding: 5rem 1rem 6rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
+  max-width: none;
+  margin: 0;
   box-sizing: border-box;
   font-family: var(--font);
 }
