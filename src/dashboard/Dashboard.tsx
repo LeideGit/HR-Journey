@@ -30,11 +30,6 @@ interface DashboardProps {
 }
 
 export function Dashboard({ onOpenPerson }: DashboardProps) {
-  // Dagens datum i svensk tid. Används för datumvisning i rubriken.
-  const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', year: 'numeric', month: '2-digit', day: '2-digit' })
-    .format(new Date())
-    .split('-')
-    .join('-');
   const [profileType, setProfileType] = useState<ProfileType | ''>('');
   const [status, setStatus] = useState<MilestoneStatus | ''>('');
   const queue = useQueue();
@@ -63,14 +58,6 @@ export function Dashboard({ onOpenPerson }: DashboardProps) {
     <main className="dash">
       {errorMessage && <p role="alert" className="dash-alert">Kunde inte hämta data: {errorMessage}</p>}
       {loading && <p role="status" className="dash-status">Hämtar arbetskön…</p>}
-
-      <header className="dash-head">
-        <div className="dash-head-text">
-          <h1 className="dash-title">Välkommen!</h1>
-          <p className="dash-lede">Det som behöver din uppmärksamhet just nu.</p>
-        </div>
-        <time className="dash-date" dateTime={today}>{formatDate(today)}</time>
-      </header>
 
       <section className="dash-kpis" aria-label="Översikt">
         <KpiCard tone="rose" value={counts.forsenade} label="Försenade" detail="milestones" />
