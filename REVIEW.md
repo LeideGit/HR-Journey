@@ -60,7 +60,12 @@ Varje fynd anger: **severity** (kritisk, hög, medel, låg), **scenario**, **imp
 |---|---|---|
 | Låg | Ändring utan påverkan på data, behörighet eller hemligheter | Passerar utan separat mänsklig reviewer när alla kontroller är gröna |
 | Normal | Övrig funktionell ändring | Minst en mänsklig reviewer |
-| Hög | Se nedan | Minst två mänskliga reviewers och säkerhetsgranskning |
+| Hög | Se nedan | Minst en mänsklig reviewer under demo med fiktiv data, två när verklig data används (se nedan) |
+
+**Undantag för demo med fiktiv data (beslut 2026-11-03):**
+Under demo, där all data är fiktiv (SEC-001, PP-020), räcker en mänsklig reviewer även för hög risk. Det gäller bara så länge ingen verklig persondata eller verkliga HR-dokument finns i systemet, eller i hostat projekt.
+
+Undantaget upphör automatiskt när verklig data introduceras. Då gäller två mänskliga reviewers igen, enligt PRD SEC-022 och DEP-009. Säkerhetsgranskningen i avsnitt 5 gäller oförändrat.
 
 **Alltid hög risk:**
 - Auth
@@ -125,7 +130,7 @@ En feature får bara vara `complete` när:
 - acceptanskriterier är verifierade,
 - tester och evals passerar,
 - säkerhetsgranskning är godkänd,
-- mänskliga godkännanden finns,
+- mänskliga godkännanden finns (en för hög risk under demo med fiktiv data, två när verklig data används),
 - progress och rapporter är avstämda,
 - inga blockerande fynd finns,
 - deploymentevidens finns när featuren påstås vara lanserad.
