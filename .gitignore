@@ -31,3 +31,6 @@ graphify-out/
 
 # TypeScript build info (incremental build cache)
 *.tsbuildinfo
+
+# Wireframe-bilder, lokala arbetsunderlag
+wireframes/
