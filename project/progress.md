@@ -5,7 +5,7 @@ Uppdaterad 2026-11-05. Statusen här måste stämma med `project/feature-list.js
 ## Läge
 
 - **Live:** https://leidegit.github.io/HR-Journey/ (HTTP 200). Bygget körs från `main` via GitHub Actions.
-- **`main`:** `4e1478a`. Innehåller PR #1 till #18. Inga öppna PR.
+- **`main`:** `f0ac57c`. Innehåller PR #1 till #19. Inga öppna PR.
 - **Hostat projekt** `hr-journey`: fyra migrationer tillämpade, RLS aktivt på alla sju `public`-tabeller, privat bucket `dokument`, seed inlagd (3 personer, 2 dokument, 3 versioner). Migrationen `20261103100000_dokument_person_koppling.sql` (PR #18) finns i repot. Att den är tillämpad hostat är inte verifierat.
 - **Konton** (hostat och lokalt): `hr@example.test` (roll `hr`) och `hr-admin@example.test` (roll `hr_admin`), lösenord `demo`. Inloggning verifierad i webbläsare för hostat och via Auth-API för lokalt.
 - **Självregistrering:** avstängd i hostat projekt (`disable_signup=true`).
@@ -32,6 +32,7 @@ REVIEW.md kräver en mänsklig granskare som inte är författaren för normal r
 | #16 | FEAT-006 dokumentvy | normal | 0 |
 | #17 | REVIEW: en granskare för hög risk under demo | låg | 0 |
 | #18 | Fyra fiktiva dokument med RLS-tester | hög | 0 |
+| #19 | FEAT-006 status in-progress, progress (endast docs) | låg | användarens godkännande, `verify.sh` ej körd |
 
 Mergarna gjordes av `LeideGit`, som är författaren. Ingen av dem har en andra granskare.
 
