@@ -132,7 +132,7 @@
       "id": "FEAT-006",
       "title": "Dokument, versioner, giltighet och gallring",
       "scope": "MVP",
-      "status": "planned",
+      "status": "in-progress",
       "spec": "specs/FEAT-006-dokument-versioner-och-gallring.md",
       "blocked_by": [
         "OQ-004",
@@ -141,8 +141,26 @@
       "blocked_parts": [
         "Office-preview"
       ],
-      "implementation": null,
-      "evidence": null
+      "implementation": [
+        "src/documents/DocumentsView.tsx",
+        "src/documents/documentData.ts",
+        "supabase/migrations/20261029120000_dokument_och_versioner.sql",
+        "supabase/migrations/20261029130000_privat_storage.sql",
+        "supabase/migrations/20261103100000_dokument_person_koppling.sql"
+      ],
+      "evidence": [
+        "src/documents/documentData.test.ts (9 tester)",
+        "src/documents/DocumentsView.test.tsx (10 tester)",
+        "supabase/tests/rls_dokument.sql (7 PASS)",
+        "supabase/tests/rls_dokument_person.sql",
+        "Dokumentvy mergad PR #16, fiktiva dokument och personkoppling PR #18"
+      ],
+      "not_yet": [
+        "Uppladdning, versionshantering i UI, nedladdning med loggning",
+        "Förhandsgranskning: PDF ej byggd. Office blockerad av OQ-004",
+        "Sökning (FR-DSRCH), gallring, permanent radering, arkivering",
+        "Granskning: PR #16 och #18 mergade utan granskning"
+      ]
     },
     {
       "id": "FEAT-007",

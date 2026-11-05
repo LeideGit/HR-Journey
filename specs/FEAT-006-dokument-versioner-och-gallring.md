@@ -1,7 +1,7 @@
 # FEAT-006 Dokument, versioner, giltighet och gallring
 
 - **FEAT-ID:** FEAT-006
-- **Status:** planned
+- **Status:** in-progress
 - **Scopeklassificering:** MVP
 - **PRD-ID:** PP-006, PP-007, PP-008, PP-010, PP-011, PP-012, G-007, G-008, G-009, G-010, G-011, SK-011, SK-012, SK-013, FR-DOC-001 till FR-DOC-011, FR-DVER-001 till FR-DVER-006, FR-DSRCH-001 till FR-DSRCH-005, FR-DVAL-001 till FR-DVAL-003, FR-DRET-001 till FR-DRET-004, FR-DARCH-001, FR-DARCH-002, AC-007 till AC-011, SEC-003, SEC-007 till SEC-010, TEST-005, TEST-007, TEST-008, OQ-004, BL-001, BL-002, BL-004, BL-006, BL-007, BL-008, BL-009, BL-016
 
@@ -86,7 +86,17 @@
 
 ## 9. Verifieringsevidens
 
-Ingen.
+Implementerat (skrivskyddat, ingen uppladdning ännu):
+
+- Dokumentvy enligt wireframe 03: lista, KPI-kort efter status och länk till personkoppling. `src/documents/DocumentsView.tsx`, `src/documents/documentData.ts`. Data hämtas från `documents` och `document_person_links` via RLS. Mergad i PR #16 och #18.
+- Status (giltig, snart utgången, utgången, gallring krävs, arkiverad) beräknas i `documentStatus` (FEAT-006-B18, B20).
+- Fyra fiktiva dokument med personkoppling och ett särskilt skyddat, seed i `supabase/seed.sql`. Migration `20261103100000_dokument_person_koppling.sql` (PR #18).
+- Tester: `src/documents/documentData.test.ts` (9), `src/documents/DocumentsView.test.tsx` (10).
+- RLS: `supabase/tests/rls_dokument.sql` (7 PASS), `supabase/tests/rls_dokument_person.sql`.
+
+Ej implementerat: uppladdning, versionshantering i UI, förhandsgranskning (PDF och Office), nedladdning med loggning, sökning, gallring och permanent radering, arkivering och återställning, koppling till hostad Storage-policy, tester för AC-FEAT-006-1 till AC-FEAT-006-5.
+
+Ingen granskning av PR #16 och #18 är registrerad. PR #18 är hög risk enligt REVIEW.md.
 
 ## 10. Öppna blockerare
 
