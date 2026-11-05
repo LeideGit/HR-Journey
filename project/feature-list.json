@@ -163,6 +163,23 @@
       ]
     },
     {
+      "id": "FEAT-013",
+      "title": "Personlista",
+      "scope": "MVP",
+      "status": "planned",
+      "spec": "specs/FEAT-013-personlista.md",
+      "blocked_by": [],
+      "blocked_parts": [
+        "FEAT-013-B6 (statusfilter och arkivering av person, avvaktat)"
+      ],
+      "future_scope": [
+        "FR-PERSON-009",
+        "FR-PERSON-010"
+      ],
+      "implementation": null,
+      "evidence": null
+    },
+    {
       "id": "FEAT-007",
       "title": "AI-assistent (read-only, mockmotor)",
       "scope": "MVP",
