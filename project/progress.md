@@ -59,10 +59,12 @@ Status nedan är den som står i `project/feature-list.json`. Där skiljer den s
 | FEAT-010 Datamodell, RLS, Storage | in-progress | 7 tabeller, RLS, privat Storage, seed, RLS-tester, hostat | Storage-policytest mot hostat, UI-koppling, gallring |
 | FEAT-011 Administration | planned | Ingenting | Allt. Malländring blockerad av OQ-002 |
 | FEAT-012 Plattform, CI, deploy | in-progress | CI, Pages live | Evals-runner, PR-granskningsautomatik, tillgänglighetstest |
+| FEAT-013 Personlista | planned | Spec och PRD-tillägg (FR-PERSON-006 till 008 MVP, 009 och 010 Future) | Allt. Statusfilter och arkivering av person avvaktade (FEAT-013-B6) |
 
 ## Avvikelser att åtgärda
 
 - **FEAT-004:s "Hostat 2026-11-03"-evidens** bygger på att kod från PR #10–#11 körts mot hostad data. Ingen granskning av dessa PR är gjord.
+- **Menylänken "Personer" visar dashboarden** (`src/App.tsx` faller igenom). Falskt success state. Användarens beslut 2026-11-05: låts stå tills FEAT-013 byggs, då kopplas den till listvyn.
 
 ## Beslut
 
@@ -72,18 +74,20 @@ Status nedan är den som står i `project/feature-list.json`. Där skiljer den s
 | OQ-002 | Konfliktregel mallpropagering | avvaktad (D-6) | FEAT-003, FEAT-011 |
 | OQ-003 | Tidsskala | **stängd 2026-10-29** | — |
 | OQ-004 | Previewteknik Office-filer | öppen, ägare användaren | FEAT-006 (DOCX, XLSX, PPTX) |
+| FEAT-013-B6 | Statusfilter och arkivering av person | avvaktad av användaren 2026-11-05 | FEAT-013 (statusdelen) |
 | D-7 | Användarprovisionering | avvaktad, demo-MVP | Fler konton än demo |
 | M365 | M365-mock som MVP-scope | godkänd i ADR-007, ej i PRD v002 | Konflikt tills PRD uppdateras |
 
 ## Nästa steg (plan)
 
-1. **Granskning av PR #10–#18**, eller uttryckligt accepterande av avvikelsen för dessa. Användarens beslut. PR #18 är hög risk.
+1. **Granskning av PR #10–#18**, eller uttryckligt accepterande av avvikelsen för dessa. Användarens beslut. PR #18 är hög risk. Användaren har godkänt avvikelsen för PR #1–#15. PR #16–#18 är ogranskade.
 2. **FEAT-004, OQ-001.** Gräns Kommande/Aktuellt, användarens beslut.
-3. **FEAT-002, koppla personsidan till hostad data** och bygga flikarna Dokument och Historik.
-4. **FEAT-006, uppladdning och Storage** mot hostad data. Office väntar på OQ-004.
-5. **FEAT-012, evals-runner och granskningsautomatik.** Lägre prioritet, eftersom `verify.sh` är släppt.
-6. **FEAT-005, 009, 011**: mejl, historik och administration.
-7. **FEAT-007 och FEAT-008**: AI-mock och M365-mock.
+3. **FEAT-013, personlista.** Spec klar (planned). Bygg listan, sök och filter (FR-PERSON-006 till 008), och koppla menylänken "Personer" till listvyn i samma ändring.
+4. **FEAT-002, koppla personsidan till hostad data** och bygga flikarna Dokument och Historik.
+5. **FEAT-006, uppladdning och Storage** mot hostad data. Office väntar på OQ-004.
+6. **FEAT-012, evals-runner och granskningsautomatik.** Lägre prioritet, eftersom `verify.sh` är släppt.
+7. **FEAT-005, 009, 011**: mejl, historik och administration.
+8. **FEAT-007 och FEAT-008**: AI-mock och M365-mock.
 
 Varje punkt ska ge en PR med berörda FEAT uppdaterade i samma ändring, och granskare enligt REVIEW.md.
 
@@ -101,6 +105,7 @@ Varje punkt ska ge en PR med berörda FEAT uppdaterade i samma ändring, och gra
 ## Ej gjort
 
 - Granskning av PR #10–#18.
+- Personlista (FEAT-013): ingen implementation. Menylänken "Personer" visar dashboarden.
 - Evals-runner. Cases är `not-run`.
 - Visuell och tillgänglighetstest (NFR-012, WCAG 2.2 AA).
 - Inloggningstest i CI i webbläsare.
